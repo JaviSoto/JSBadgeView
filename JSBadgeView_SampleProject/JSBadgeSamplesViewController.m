@@ -20,8 +20,6 @@
 
 @interface JSBadgeSamplesViewController ()
 
-- (JSBadgeView *)configuredBadgeView;
-
 @end
 
 @implementation JSBadgeSamplesViewController
@@ -52,7 +50,7 @@
                                                                      kSquareSideLength)];
         rectangle.backgroundColor = kSquareColor;
         
-        JSBadgeView *badgeView = [self configuredBadgeView];
+        JSBadgeView *badgeView = [[JSBadgeView alloc] init];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
         
         [badgeView addToView:rectangle];
@@ -69,13 +67,6 @@
     }
     
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, yOffset + kSquareSideLength + kMarginBetweenSquares);
-}
-
-- (JSBadgeView *)configuredBadgeView
-{
-    JSBadgeView *badgeView = [[JSBadgeView alloc] init];
-    
-    return badgeView;
 }
 
 @end
