@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D40E7D015BFA2E200C114CF /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40E7CF15BFA2E200C114CF /* JSBadgeView.m */; };
+		1D40E7D715BFA55A00C114CF /* JSBadgeSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D40E7D615BFA55A00C114CF /* JSBadgeSamplesViewController.m */; };
+		1D40E7D915BFA74200C114CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D40E7D815BFA74200C114CF /* QuartzCore.framework */; };
 		1D4B46D215BFA20D00143C2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4B46D115BFA20D00143C2C /* UIKit.framework */; };
 		1D4B46D415BFA20D00143C2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4B46D315BFA20D00143C2C /* Foundation.framework */; };
 		1D4B46D615BFA20D00143C2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D4B46D515BFA20D00143C2C /* CoreGraphics.framework */; };
@@ -16,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D40E7CE15BFA2E200C114CF /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		1D40E7CF15BFA2E200C114CF /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
+		1D40E7D515BFA55A00C114CF /* JSBadgeSamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeSamplesViewController.h; sourceTree = "<group>"; };
+		1D40E7D615BFA55A00C114CF /* JSBadgeSamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeSamplesViewController.m; sourceTree = "<group>"; };
+		1D40E7D815BFA74200C114CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1D4B46CD15BFA20D00143C2C /* JSBadgeView_SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSBadgeView_SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D4B46D115BFA20D00143C2C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1D4B46D315BFA20D00143C2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -33,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D40E7D915BFA74200C114CF /* QuartzCore.framework in Frameworks */,
 				1D4B46D215BFA20D00143C2C /* UIKit.framework in Frameworks */,
 				1D4B46D415BFA20D00143C2C /* Foundation.framework in Frameworks */,
 				1D4B46D615BFA20D00143C2C /* CoreGraphics.framework in Frameworks */,
@@ -42,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D40E7CD15BFA2E200C114CF /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				1D40E7CE15BFA2E200C114CF /* JSBadgeView.h */,
+				1D40E7CF15BFA2E200C114CF /* JSBadgeView.m */,
+			);
+			path = JSBadgeView;
+			sourceTree = SOURCE_ROOT;
+		};
 		1D4B46C215BFA20D00143C2C = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +80,7 @@
 		1D4B46D015BFA20D00143C2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D40E7D815BFA74200C114CF /* QuartzCore.framework */,
 				1D4B46D115BFA20D00143C2C /* UIKit.framework */,
 				1D4B46D315BFA20D00143C2C /* Foundation.framework */,
 				1D4B46D515BFA20D00143C2C /* CoreGraphics.framework */,
@@ -74,6 +93,9 @@
 			children = (
 				1D4B46E015BFA20D00143C2C /* JSAppDelegate.h */,
 				1D4B46E115BFA20D00143C2C /* JSAppDelegate.m */,
+				1D40E7D515BFA55A00C114CF /* JSBadgeSamplesViewController.h */,
+				1D40E7D615BFA55A00C114CF /* JSBadgeSamplesViewController.m */,
+				1D40E7CD15BFA2E200C114CF /* JSBadgeView */,
 				1D4B46D815BFA20D00143C2C /* Supporting Files */,
 			);
 			path = JSBadgeView_SampleProject;
@@ -155,6 +177,8 @@
 			files = (
 				1D4B46DE15BFA20D00143C2C /* main.m in Sources */,
 				1D4B46E215BFA20D00143C2C /* JSAppDelegate.m in Sources */,
+				1D40E7D015BFA2E200C114CF /* JSBadgeView.m in Sources */,
+				1D40E7D715BFA55A00C114CF /* JSBadgeSamplesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +259,7 @@
 		1D4B46E715BFA20D00143C2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSBadgeView_SampleProject/JSBadgeView_SampleProject-Prefix.pch";
 				INFOPLIST_FILE = "JSBadgeView_SampleProject/JSBadgeView_SampleProject-Info.plist";
@@ -262,6 +287,7 @@
 				1D4B46E715BFA20D00143C2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
