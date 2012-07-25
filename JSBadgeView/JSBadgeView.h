@@ -49,9 +49,9 @@ typedef enum {
 @property (nonatomic, strong) UIColor *badgeBackgroundColor;
 
 /**
- * @discussion top color of a gradient that fades to transparent at the botom.
+ * @discussion color of the overlay circle at the top.
  */
-@property (nonatomic, strong) UIColor *badgeGradientColor;
+@property (nonatomic, strong) UIColor *badgeOverlayColor;
 
 /**
  * @discussion allows to shift the badge by x and y points.

@@ -22,29 +22,29 @@
 
 #define kDefaultBadgeTextColor [UIColor whiteColor]
 #define kDefaultBadgeBackgroundColor [UIColor redColor]
-#define kDefaultGradientColor [UIColor whiteColor]
+#define kDefaultOverlayColor [UIColor colorWithWhite:1.0f alpha:0.3]
 
-#define kDefaultBadgeTextFont [UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]
+#define kDefaultBadgeTextFont [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]
 
 #define kDefaultBadgeShadowColor [UIColor clearColor]
 
 #define kBadgeStrokeColor [UIColor whiteColor]
 #define kBadgeStrokeWidth 2.0f
 
-#define kShadowOffset CGSizeMake(0.0f, 1.0f)
+#define kShadowOffset CGSizeMake(0.0f, 2.0f)
 #define kShadowColor [UIColor blackColor]
 #define kShadowOpacity 0.3f
 
-#define kBadgeHeight 16.0f
+#define kBadgeHeight 20.0f
 #define kBadgeTextSideMargin 10.0f
 
-#define kBadgeCornerRadius 8.0f
+#define kBadgeCornerRadius 10.0f
 
 #define kDefaultBadgeAlignment JSBadgeViewAlignmentTopRight
 
-@interface _JSBadgeViewGradientOverlay : CAGradientLayer
+@interface _JSBadgeViewOverlay : CALayer
 
-@property (nonatomic, strong) UIColor *badgeGradientColor;
+@property (nonatomic, strong) UIColor *badgeOverlayColor;
 
 @end
 
@@ -53,7 +53,7 @@
 @property (nonatomic, strong) UILabel *badgeTextLabel;
 @property (nonatomic, strong) UIView *shadowView;
 
-@property (nonatomic, strong) _JSBadgeViewGradientOverlay *gradientLayer;
+@property (nonatomic, strong) _JSBadgeViewOverlay *overlayLayer;
 
 - (void)_init;
 - (CGFloat)widthOfTextForCurrentSettings;
@@ -69,7 +69,7 @@
 
 @synthesize shadowView = _shadowView;
 
-@synthesize gradientLayer = _gradientLayer;
+@synthesize overlayLayer = _overlayLayer;
 
 @synthesize badgeText = _badgeText;
 @synthesize badgeTextColor = _badgeTextColor;
@@ -98,11 +98,9 @@
 
 - (void)_init
 {
-    self.gradientLayer = [[_JSBadgeViewGradientOverlay alloc] init];
-    _gradientLayer.frame = self.bounds;
-    _gradientLayer.contentsGravity = kCAGravityTop;
-    _gradientLayer.needsDisplayOnBoundsChange = YES;
-    [self.layer addSublayer:_gradientLayer];
+    self.overlayLayer = [[_JSBadgeViewOverlay alloc] init];
+    _overlayLayer.frame = self.bounds;
+    [self.layer addSublayer:_overlayLayer];
     
     self.badgeTextLabel = [[UILabel alloc] init];
     _badgeTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -130,7 +128,7 @@
     _shadowView.layer.shadowColor = kShadowColor.CGColor;
     _shadowView.layer.shadowOffset = kShadowOffset;
     _shadowView.layer.shadowOpacity = kShadowOpacity;
-    _shadowView.layer.shadowRadius = 1.0f;
+    _shadowView.layer.shadowRadius = 2.0f;
 
     self.clipsToBounds = YES;
 }
@@ -162,8 +160,8 @@
     
     CGFloat textWidth = [self widthOfTextForCurrentSettings];
 
-    CGFloat viewWidth = textWidth + kBadgeTextSideMargin;
     CGFloat viewHeight = kBadgeHeight;
+    CGFloat viewWidth = MAX(textWidth + kBadgeTextSideMargin, kBadgeHeight); // Avoid a taller than wider view
 
     CGFloat superviewWidth = superviewFrame.size.width;
     CGFloat superviewHeight = superviewFrame.size.height;
@@ -238,7 +236,7 @@
     [super setFrame:frame];
 
     [self adjustShadowViewFrame];
-    self.gradientLayer.frame = self.bounds;
+    self.overlayLayer.frame = self.bounds;
 }
 
 - (void)setBadgeAlignment:(JSBadgeViewAlignment)badgeAlignment
@@ -321,9 +319,9 @@
     self.backgroundColor = badgeBackgroundColor;
 }
 
-- (void)setBadgeGradientColor:(UIColor *)badgeGradientColor
+- (void)setBadgeOverlayColor:(UIColor *)badgeOverlayColor
 {
-    self.gradientLayer.badgeGradientColor = badgeGradientColor;
+    self.overlayLayer.badgeOverlayColor = badgeOverlayColor;
 }
 
 #pragma mark - Getters
@@ -358,60 +356,62 @@
     return self.backgroundColor;
 }
 
-- (UIColor *)badgeGradientColor
+- (UIColor *)badgeOverlayColor
 {
-    return self.gradientLayer.badgeGradientColor;
+    return self.overlayLayer.badgeOverlayColor;
 }
 
 @end
 
-@implementation _JSBadgeViewGradientOverlay
+@implementation _JSBadgeViewOverlay
 
-@synthesize badgeGradientColor = _badgeGradientColor;
-
-- (void)setGradientColors
-{
-    self.colors = [NSArray arrayWithObjects:(id)self.badgeGradientColor.CGColor, (id)[UIColor clearColor].CGColor, nil];
-}
+@synthesize badgeOverlayColor = _badgeOverlayColor;
 
 - (id)init
 {
     if ((self = [super init]))
     {
-        const CGFloat kGradientOpacity = 0.5f;
-        
-        [self setGradientColors];
-
-        self.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0f], [NSNumber numberWithFloat:1.0f], nil];
-
-        self.startPoint = CGPointMake(0.0f, 0.0f);
-        self.endPoint = CGPointMake(0.0f, 1.0f);
-
-        self.opacity = kGradientOpacity;
+        self.contentsScale = [UIScreen mainScreen].scale;
+        self.needsDisplayOnBoundsChange = YES;
     }
-
+    
     return self;
 }
 
-- (void)setBadgeGradientColor:(UIColor *)badgeGradientColor
+- (void)drawInContext:(CGContextRef)ctx
 {
-    if (badgeGradientColor != _badgeGradientColor)
-    {
-        _badgeGradientColor = badgeGradientColor;
-        
-        [self setGradientColors];
-        [self setNeedsDisplay];
-    }
+    CGFloat height = self.frame.size.height;
+    CGFloat width = self.frame.size.width;
+    
+    CGRect rectForOverlayCircle = CGRectMake(0.0f,
+                                             -height * 0.5,
+                                             width,
+                                             height);
+    
+    CGContextAddEllipseInRect(ctx, rectForOverlayCircle);
+    CGContextSetFillColorWithColor(ctx, self.badgeOverlayColor.CGColor);
+    
+    CGContextDrawPath(ctx, kCGPathFill);
 }
 
-- (UIColor *)badgeGradientColor
+- (UIColor *)badgeOverlayColor
 {
-    if (!_badgeGradientColor)
+    if (!_badgeOverlayColor)
     {
-        return kDefaultGradientColor;
+        return kDefaultOverlayColor;
     }
     
-    return _badgeGradientColor;
+    return _badgeOverlayColor;
+}
+
++ (BOOL)needsDisplayForKey:(NSString *)key
+{
+    if ([key isEqualToString:@"badgeOverlayColor"])
+    {
+        return YES;
+    }
+    
+    return [super needsDisplayForKey:key];
 }
 
 @end
