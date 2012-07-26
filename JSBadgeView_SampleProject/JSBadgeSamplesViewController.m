@@ -44,16 +44,16 @@
     
     for (int i = 0; i < kNumBadges; i++)
     {
-        UIView *rectangle = [[UIView alloc] initWithFrame:CGRectMake(xOffset,
-                                                                     yOffset,
-                                                                     kSquareSideLength,
-                                                                     kSquareSideLength)];
+        UIView *rectangle = [[UIView alloc] initWithFrame:CGRectIntegral(CGRectMake(xOffset,
+                                                                                    yOffset,
+                                                                                    kSquareSideLength,
+                                                                                    kSquareSideLength))];
         rectangle.backgroundColor = kSquareColor;
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] init];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
-        
-        [badgeView addToView:rectangle];
+                
+        [rectangle addSubview:badgeView];
         [scrollView addSubview:rectangle];
         [scrollView sendSubviewToBack:rectangle];
                 

@@ -58,6 +58,10 @@ typedef enum {
  */
 @property (nonatomic, assign) CGPoint badgePositionAdjustment;
 
-- (void)addToView:(UIView *)parentView;
+/**
+ * @discussion (optional) If not provided, the superview frame is used.
+ * You can use this to position the view if you're drawing it using drawRect instead of `-addSubview:`
+ */
+@property (nonatomic, assign) CGRect frameToPositionInRelationWith;
 
 @end
