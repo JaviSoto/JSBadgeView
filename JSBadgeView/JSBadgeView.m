@@ -31,12 +31,15 @@
 #define kBadgeStrokeColor [UIColor whiteColor]
 #define kBadgeStrokeWidth 2.0f
 
+#define kMarginToDrawInside kBadgeStrokeWidth
+
 #define kShadowOffset CGSizeMake(0.0f, 2.0f)
-#define kShadowOpacity 0.3f
+#define kShadowOpacity 0.4f
 #define kShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
+#define kShadowRadius 1.0f
 
 #define kBadgeHeight 20.0f
-#define kBadgeTextSideMargin 10.0f
+#define kBadgeTextSideMargin 8.0f
 
 #define kBadgeCornerRadius 10.0f
 
@@ -151,7 +154,7 @@
     newFrame.origin.x += _badgePositionAdjustment.x;
     newFrame.origin.y += _badgePositionAdjustment.y;
     
-    self.frame = CGRectInset(CGRectIntegral(newFrame), -kBadgeStrokeWidth, -kBadgeStrokeWidth);
+    self.frame = CGRectInset(CGRectIntegral(newFrame), -kMarginToDrawInside, -kMarginToDrawInside);
     
     [self setNeedsDisplay];
 }
@@ -282,7 +285,8 @@
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    CGRect rectToDraw = CGRectInset(rect, kBadgeStrokeWidth, kBadgeStrokeWidth);
+    CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
+    const CGFloat offsetToCorrectTheMargin = kMarginToDrawInside;
     
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(kBadgeCornerRadius, kBadgeCornerRadius)];
     
@@ -292,7 +296,7 @@
         CGContextAddPath(ctx, borderPath.CGPath);
         
         CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-        CGContextSetShadowWithColor(ctx, kShadowOffset, 1.0, kShadowColor.CGColor);
+        CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
         
         CGContextDrawPath(ctx, kCGPathFill);
     }
@@ -311,8 +315,8 @@
             CGFloat height = rectToDraw.size.height;
             CGFloat width = rectToDraw.size.width;
             
-            CGRect rectForOverlayCircle = CGRectMake(0.0f,
-                                                     -height * 0.5,
+            CGRect rectForOverlayCircle = CGRectMake(offsetToCorrectTheMargin,
+                                                     offsetToCorrectTheMargin - ceilf(height * 0.5),
                                                      width,
                                                      height);
             
@@ -342,12 +346,14 @@
         CGContextSetFillColorWithColor(ctx, self.badgeTextColor.CGColor);
         CGContextSetShadowWithColor(ctx, self.badgeTextShadowOffset, 1.0, self.badgeTextShadowColor.CGColor);
         
-        CGRect textFrame = rect;
+        CGRect textFrame = rectToDraw;
         CGSize textSize = [self sizeOfTextForCurrentSettings];
+
+        textFrame.origin.x = offsetToCorrectTheMargin;
+        textFrame.origin.y = offsetToCorrectTheMargin;
         
         textFrame.size.height = textSize.height;
-        #warning this is just a temporary hack to place the text. Figure out what's wrong with the frames. Possibly when I'm not feeling sleepy.
-        textFrame.origin.y += 1.0f;
+        textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
         
         [self.badgeText drawInRect:textFrame
                           withFont:self.badgeTextFont
