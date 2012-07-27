@@ -66,12 +66,9 @@
         rectangle.layer.shadowRadius = 1.0;
         rectangle.layer.shadowPath = rectangleShadowPath;        
         
-        JSBadgeView *badgeView = [[JSBadgeView alloc] init];
+        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:rectangle alignment:JSBadgeViewAlignmentTopRight];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
-        
-        badgeView.badgeAlignment = JSBadgeViewAlignmentTopRight;
-                
-        [rectangle addSubview:badgeView];
+
         [scrollView addSubview:rectangle];
         [scrollView sendSubviewToBack:rectangle];
                 
