@@ -163,7 +163,7 @@
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
         default:
-            NSAssert(NO, @"Unimplemented MSBadgeAligment type %d", self.badgeAlignment);
+            NSAssert(NO, @"Unimplemented JSBadgeAligment type %d", self.badgeAlignment);
     }
     
     newFrame.origin.x += _badgePositionAdjustment.x;
@@ -219,7 +219,7 @@
                 self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
                 break;
             default:
-                NSAssert(NO, @"Unimplemented MSBadgeAligment type %d", self.badgeAlignment);
+                NSAssert(NO, @"Unimplemented JSBadgeAligment type %d", self.badgeAlignment);
         }
 
         [self setNeedsLayout];
