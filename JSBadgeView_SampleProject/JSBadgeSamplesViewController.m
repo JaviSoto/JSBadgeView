@@ -10,13 +10,16 @@
 
 #import "JSBadgeView.h"
 
-#define kNumBadges 50
+#import <QuartzCore/QuartzCore.h>
 
-#define kViewBackgroundColor [UIColor colorWithRed:197/255.0 green:147/255.0 blue:74/255.0 alpha:1.0f]
+#define kNumBadges 100
 
-#define kSquareSideLength 75.0f
-#define kMarginBetweenSquares 20.0f
-#define kSquareColor [UIColor colorWithWhite:0.4 alpha:1.0f]
+#define kViewBackgroundColor [UIColor colorWithRed:0.357 green:0.757 blue:0.357 alpha:1]
+
+#define kSquareSideLength 64.0f
+#define kSquareCornerRadius 10.0f
+#define kMarginBetweenSquares 10.0f
+#define kSquareColor [UIColor colorWithRed:0.004 green:0.349 blue:0.616 alpha:1]
 
 @interface JSBadgeSamplesViewController ()
 
@@ -42,16 +45,31 @@
     const CGFloat kInitialYOffset = kInitialXOffset;
     CGFloat yOffset = kInitialYOffset;
     
+    CGRect rectangleBounds = CGRectMake(0.0f,
+                                        0.0f,
+                                        kSquareSideLength,
+                                        kSquareSideLength);
+    
+    CGPathRef rectangleShadowPath = [UIBezierPath bezierPathWithRoundedRect:rectangleBounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(kSquareCornerRadius, kSquareCornerRadius)].CGPath;
+    
     for (int i = 0; i < kNumBadges; i++)
     {
         UIView *rectangle = [[UIView alloc] initWithFrame:CGRectIntegral(CGRectMake(xOffset,
                                                                                     yOffset,
-                                                                                    kSquareSideLength,
-                                                                                    kSquareSideLength))];
+                                                                                    rectangleBounds.size.width,
+                                                                                    rectangleBounds.size.height))];
         rectangle.backgroundColor = kSquareColor;
+        rectangle.layer.cornerRadius = kSquareCornerRadius;
+        rectangle.layer.shadowColor = [UIColor blackColor].CGColor;
+        rectangle.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
+        rectangle.layer.shadowOpacity = 0.4;
+        rectangle.layer.shadowRadius = 1.0;
+        rectangle.layer.shadowPath = rectangleShadowPath;        
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] init];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
+        
+        badgeView.badgeAlignment = JSBadgeViewAlignmentTopRight;
                 
         [rectangle addSubview:badgeView];
         [scrollView addSubview:rectangle];
@@ -66,7 +84,7 @@
         }
     }
     
-    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, yOffset + kSquareSideLength + kMarginBetweenSquares);
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, yOffset);
 }
 
 @end
