@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>JSBadgeView by JaviSoto</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>JSBadgeView</h1>
+        <p>Customizable UIKit badge view like the one on applications in the iOS springboard.</p>
+
+        <p class="view"><a href="https://github.com/JaviSoto/JSBadgeView">View the Project on GitHub <small>JaviSoto/JSBadgeView</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/JaviSoto/JSBadgeView/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/JaviSoto/JSBadgeView/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/JaviSoto/JSBadgeView">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>JSBadgeView</h2>
+
+<p>Customizable UIKit badge view like the one on applications in the iOS springboard.
+Very optimized for performance: drawn entirely using CoreGraphics.</p>
+
+<p><img src="http://f.cl.ly/items/0m0v2C0D2v232n12071q/Screen%20Shot%202012-07-26%20at%2010.54.43%20PM.png"></p>
+
+<h2>Usage</h2>
+
+<ul>
+<li>Clone the repository:</li>
+</ul><div class="highlight"><pre><span class="nv">$ </span>git clone git@github.com:JaviSoto/JSBadgeView.git
+</pre></div>
+
+<ul>
+<li><p>Check out the sample project.</p></li>
+<li><p>Drag the <code>JSBadgeView</code> folder into your project.</p></li>
+<li><p>Include the header file:</p></li>
+</ul><div class="highlight"><pre><span class="cp">#import "JSBadgeView.h"</span>
+</pre></div>
+
+<ul>
+<li>Create a <code>JSBadgeView</code> and attach it to a view at the position you like. Example:</li>
+</ul><div class="highlight"><pre><span class="n">JSBadgeView</span> <span class="o">*</span><span class="n">badgeView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">JSBadgeView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithParentView:</span><span class="n">rectangle</span> <span class="nl">alignment:</span><span class="n">JSBadgeViewAlignmentTopRight</span><span class="p">];</span>
+<span class="n">badgeView</span><span class="p">.</span><span class="n">badgeText</span> <span class="o">=</span> <span class="s">@"3"</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li>Check the header file for all the things you can customize.</li>
+</ul><h2>Dependencies</h2>
+
+<p><code>JSBadgeView</code> requires your application to be linked against the <code>QuartzCore.framework</code> framework.</p>
+
+<h2>Compatibility</h2>
+
+<ul>
+<li>Supports ARC. If you want to use it in a project without ARC, mark <code>JSBadgeView.m</code> with the linker flag <code>-fobjc-arc</code>.</li>
+<li>Compatible with iOS4.3+.</li>
+</ul><h2>License</h2>
+
+<p>Copyright 2012 <a href="http://twitter.com/javisoto">Javier Soto</a> (<a href="mailto:ios@javisoto.es">ios@javisoto.es</a>)</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+ limitations under the License. </p>
+
+<p>Attribution is not required, but appreciated.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/JaviSoto">JaviSoto</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker(" UA-30545231-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
