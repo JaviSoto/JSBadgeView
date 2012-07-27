@@ -20,11 +20,12 @@ typedef enum {
     JSBadgeViewAlignmentTopLeft,
     JSBadgeViewAlignmentTopRight,
     JSBadgeViewAlignmentTopCenter,
-    JSBadgeViewAlignmentLeft,
-    JSBadgeViewAlignmentRight,
+    JSBadgeViewAlignmentCenterLeft,
+    JSBadgeViewAlignmentCenterRight,
     JSBadgeViewAlignmentBottomLeft,
     JSBadgeViewAlignmentBottomRight,
-    JSBadgeViewAlignmentBottomCenter
+    JSBadgeViewAlignmentBottomCenter,
+    JSBadgeViewAlignmentCenter
 } JSBadgeViewAlignment;
 
 @interface JSBadgeView : UIView
@@ -33,11 +34,6 @@ typedef enum {
 
 #pragma mark - Customization
 
-/**
- * @discussion simply set `badgeAligment` to any of the values, and add the `JSBadgeView`
- * to the view you want it to position in relation to. You can use the helper method
- * `addToView:` for this.
- */
 @property (nonatomic, assign) JSBadgeViewAlignment badgeAlignment;
 
 @property (nonatomic, strong) UIColor *badgeTextColor;
@@ -49,7 +45,7 @@ typedef enum {
 @property (nonatomic, strong) UIColor *badgeBackgroundColor;
 
 /**
- * @discussion color of the overlay circle at the top.
+ * @discussion color of the overlay circle at the top. Default is semi-transparent white.
  */
 @property (nonatomic, strong) UIColor *badgeOverlayColor;
 
@@ -63,5 +59,10 @@ typedef enum {
  * You can use this to position the view if you're drawing it using drawRect instead of `-addSubview:`
  */
 @property (nonatomic, assign) CGRect frameToPositionInRelationWith;
+
+/**
+ * @discussion optionally init using this method to have the badge automatically added to another view.
+ */
+- (id)initWithParentView:(UIView *)parentView alignment:(JSBadgeViewAlignment)alignment;
 
 @end

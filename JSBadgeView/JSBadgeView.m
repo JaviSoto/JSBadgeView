@@ -31,14 +31,14 @@
 #define kBadgeStrokeColor [UIColor whiteColor]
 #define kBadgeStrokeWidth 2.0f
 
-#define kMarginToDrawInside kBadgeStrokeWidth
+#define kMarginToDrawInside (kBadgeStrokeWidth * 2)
 
 #define kShadowOffset CGSizeMake(0.0f, 2.0f)
 #define kShadowOpacity 0.4f
 #define kShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
 #define kShadowRadius 1.0f
 
-#define kBadgeHeight 20.0f
+#define kBadgeHeight 16.0f
 #define kBadgeTextSideMargin 8.0f
 
 #define kBadgeCornerRadius 10.0f
@@ -83,6 +83,17 @@
     return self;
 }
 
+- (id)initWithParentView:(UIView *)parentView alignment:(JSBadgeViewAlignment)alignment
+{
+    if ((self = [self initWithFrame:CGRectZero]))
+    {
+        self.badgeAlignment = alignment;
+        [parentView addSubview:self];
+    }
+    
+    return self;
+}
+
 - (void)_init
 {    
     self.backgroundColor = [UIColor clearColor];
@@ -99,14 +110,14 @@
 #pragma mark - Layout
 
 - (void)layoutSubviews
-{
+{    
     CGRect newFrame = self.frame;
     CGRect superviewFrame = CGRectIsEmpty(_frameToPositionInRelationWith) ? self.superview.frame : _frameToPositionInRelationWith;
     
     CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
     
-    CGFloat viewWidth = textWidth + kBadgeTextSideMargin;
-    CGFloat viewHeight = kBadgeHeight;
+    CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2);
+    CGFloat viewHeight = kBadgeHeight + (kMarginToDrawInside * 2);
     
     CGFloat superviewWidth = superviewFrame.size.width;
     CGFloat superviewHeight = superviewFrame.size.height;
@@ -127,11 +138,11 @@
             newFrame.origin.x = (superviewWidth - viewWidth) / 2.0f;
             newFrame.origin.y = -viewHeight / 2.0f;
             break;
-        case JSBadgeViewAlignmentLeft:
+        case JSBadgeViewAlignmentCenterLeft:
             newFrame.origin.x = -viewWidth / 2.0f;
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
-        case JSBadgeViewAlignmentRight:
+        case JSBadgeViewAlignmentCenterRight:
             newFrame.origin.x = superviewWidth - (viewWidth / 2.0f);
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
@@ -147,6 +158,10 @@
             newFrame.origin.x = (superviewWidth - viewWidth) / 2.0f;
             newFrame.origin.y = superviewHeight - (viewHeight / 2.0f);
             break;
+        case JSBadgeViewAlignmentCenter:
+            newFrame.origin.x = (superviewWidth - viewWidth) / 2.0f;
+            newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
+            break;
         default:
             NSAssert(NO, @"Unimplemented MSBadgeAligment type %d", self.badgeAlignment);
     }
@@ -154,7 +169,7 @@
     newFrame.origin.x += _badgePositionAdjustment.x;
     newFrame.origin.y += _badgePositionAdjustment.y;
     
-    self.frame = CGRectInset(CGRectIntegral(newFrame), -kMarginToDrawInside, -kMarginToDrawInside);
+    self.frame = CGRectIntegral(newFrame);
     
     [self setNeedsDisplay];
 }
@@ -167,13 +182,6 @@
 }
 
 #pragma mark - Setters
-
-- (void)setFrame:(CGRect)frame
-{
-    frame.size.height = kBadgeHeight;
-
-    [super setFrame:frame];
-}
 
 - (void)setBadgeAlignment:(JSBadgeViewAlignment)badgeAlignment
 {
@@ -192,10 +200,10 @@
             case JSBadgeViewAlignmentTopCenter:
                 self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
                 break;
-            case JSBadgeViewAlignmentLeft:
+            case JSBadgeViewAlignmentCenterLeft:
                 self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
                 break;
-            case JSBadgeViewAlignmentRight:
+            case JSBadgeViewAlignmentCenterRight:
                 self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
                 break;
             case JSBadgeViewAlignmentBottomLeft:
@@ -206,6 +214,9 @@
                 break;
             case JSBadgeViewAlignmentBottomCenter:
                 self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+                break;
+            case JSBadgeViewAlignmentCenter:
+                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
                 break;
             default:
                 NSAssert(NO, @"Unimplemented MSBadgeAligment type %d", self.badgeAlignment);
@@ -286,7 +297,6 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
-    const CGFloat offsetToCorrectTheMargin = kMarginToDrawInside;
     
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(kBadgeCornerRadius, kBadgeCornerRadius)];
     
@@ -315,8 +325,8 @@
             CGFloat height = rectToDraw.size.height;
             CGFloat width = rectToDraw.size.width;
             
-            CGRect rectForOverlayCircle = CGRectMake(offsetToCorrectTheMargin,
-                                                     offsetToCorrectTheMargin - ceilf(height * 0.5),
+            CGRect rectForOverlayCircle = CGRectMake(rectToDraw.origin.x,
+                                                     rectToDraw.origin.y - ceilf(height * 0.5),
                                                      width,
                                                      height);
             
@@ -348,9 +358,6 @@
         
         CGRect textFrame = rectToDraw;
         CGSize textSize = [self sizeOfTextForCurrentSettings];
-
-        textFrame.origin.x = offsetToCorrectTheMargin;
-        textFrame.origin.y = offsetToCorrectTheMargin;
         
         textFrame.size.height = textSize.height;
         textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
