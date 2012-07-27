@@ -11,6 +11,8 @@ Customizable UIKit badge view like the one for applications in the iOS springboa
 $ git clone git@github.com:JaviSoto/JSBadgeView.git
 ```
 
+- Check out the sample project.
+
 - Drag the ```JSBadgeView``` folder into your project.
 - Include the header file:
 
