@@ -18,8 +18,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define UICOLOR_RGB_BYTE(R, G, B, A) [UIColor colorWithRed:(R)/255.0f green:(G)/255.0f blue:(B)/255.0f alpha:(A)/255.0f]
-
 #define kDefaultBadgeTextColor [UIColor whiteColor]
 #define kDefaultBadgeBackgroundColor [UIColor redColor]
 #define kDefaultOverlayColor [UIColor colorWithWhite:1.0f alpha:0.3]
@@ -294,80 +292,85 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    BOOL anyTextToDraw = (self.badgeText.length > 0);
     
-    CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
-    
-    UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(kBadgeCornerRadius, kBadgeCornerRadius)];
-    
-    /* Background and shadow */
-    CGContextSaveGState(ctx);
+    if (anyTextToDraw)
     {
-        CGContextAddPath(ctx, borderPath.CGPath);
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
         
-        CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-        CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
+        CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
         
-        CGContextDrawPath(ctx, kCGPathFill);
-    }
-    CGContextRestoreGState(ctx);
-    
-    BOOL colorForOverlayPresent = self.badgeOverlayColor && ![self.badgeOverlayColor isEqual:[UIColor clearColor]];
-    
-    if (colorForOverlayPresent)
-    {
-        /* Gradient overlay */
+        UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(kBadgeCornerRadius, kBadgeCornerRadius)];
+        
+        /* Background and shadow */
         CGContextSaveGState(ctx);
         {
             CGContextAddPath(ctx, borderPath.CGPath);
-            CGContextClip(ctx);
             
-            CGFloat height = rectToDraw.size.height;
-            CGFloat width = rectToDraw.size.width;
-            
-            CGRect rectForOverlayCircle = CGRectMake(rectToDraw.origin.x,
-                                                     rectToDraw.origin.y - ceilf(height * 0.5),
-                                                     width,
-                                                     height);
-            
-            CGContextAddEllipseInRect(ctx, rectForOverlayCircle);
-            CGContextSetFillColorWithColor(ctx, self.badgeOverlayColor.CGColor);
+            CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
+            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathFill);
         }
         CGContextRestoreGState(ctx);
+        
+        BOOL colorForOverlayPresent = self.badgeOverlayColor && ![self.badgeOverlayColor isEqual:[UIColor clearColor]];
+        
+        if (colorForOverlayPresent)
+        {
+            /* Gradient overlay */
+            CGContextSaveGState(ctx);
+            {
+                CGContextAddPath(ctx, borderPath.CGPath);
+                CGContextClip(ctx);
+                
+                CGFloat height = rectToDraw.size.height;
+                CGFloat width = rectToDraw.size.width;
+                
+                CGRect rectForOverlayCircle = CGRectMake(rectToDraw.origin.x,
+                                                         rectToDraw.origin.y - ceilf(height * 0.5),
+                                                         width,
+                                                         height);
+                
+                CGContextAddEllipseInRect(ctx, rectForOverlayCircle);
+                CGContextSetFillColorWithColor(ctx, self.badgeOverlayColor.CGColor);
+                
+                CGContextDrawPath(ctx, kCGPathFill);
+            }
+            CGContextRestoreGState(ctx);
+        }
+        
+        /* Stroke */
+        CGContextSaveGState(ctx);
+        {
+            CGContextAddPath(ctx, borderPath.CGPath);
+            
+            CGContextSetLineWidth(ctx, kBadgeStrokeWidth);
+            CGContextSetStrokeColorWithColor(ctx, kBadgeStrokeColor.CGColor);
+            
+            CGContextDrawPath(ctx, kCGPathStroke);
+        }
+        CGContextRestoreGState(ctx);
+        
+        /* Text */
+        CGContextSaveGState(ctx);
+        {
+            CGContextSetFillColorWithColor(ctx, self.badgeTextColor.CGColor);
+            CGContextSetShadowWithColor(ctx, self.badgeTextShadowOffset, 1.0, self.badgeTextShadowColor.CGColor);
+            
+            CGRect textFrame = rectToDraw;
+            CGSize textSize = [self sizeOfTextForCurrentSettings];
+            
+            textFrame.size.height = textSize.height;
+            textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
+            
+            [self.badgeText drawInRect:textFrame
+                              withFont:self.badgeTextFont
+                         lineBreakMode:UILineBreakModeCharacterWrap
+                             alignment:UITextAlignmentCenter];
+        }
+        CGContextRestoreGState(ctx);
     }
-    
-    /* Stroke */
-    CGContextSaveGState(ctx);
-    {
-        CGContextAddPath(ctx, borderPath.CGPath);
-        
-        CGContextSetLineWidth(ctx, kBadgeStrokeWidth);
-        CGContextSetStrokeColorWithColor(ctx, kBadgeStrokeColor.CGColor);
-        
-        CGContextDrawPath(ctx, kCGPathStroke);
-    }
-    CGContextRestoreGState(ctx);
-    
-    /* Text */
-    CGContextSaveGState(ctx);
-    {
-        CGContextSetFillColorWithColor(ctx, self.badgeTextColor.CGColor);
-        CGContextSetShadowWithColor(ctx, self.badgeTextShadowOffset, 1.0, self.badgeTextShadowColor.CGColor);
-        
-        CGRect textFrame = rectToDraw;
-        CGSize textSize = [self sizeOfTextForCurrentSettings];
-        
-        textFrame.size.height = textSize.height;
-        textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
-        
-        [self.badgeText drawInRect:textFrame
-                          withFont:self.badgeTextFont
-                     lineBreakMode:UILineBreakModeCharacterWrap
-                         alignment:UITextAlignmentCenter];
-    }
-    CGContextRestoreGState(ctx);
 }
 
 @end
