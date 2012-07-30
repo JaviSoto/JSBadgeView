@@ -3,7 +3,7 @@
 Customizable UIKit badge view like the one on applications in the iOS springboard.
 Very optimized for performance: drawn entirely using CoreGraphics.
 
-<img src="http://f.cl.ly/items/0m0v2C0D2v232n12071q/Screen%20Shot%202012-07-26%20at%2010.54.43%20PM.png" />
+<img src="http://f.cl.ly/items/1L3k0z0a3X3i353M1G0h/JSBadgeView.png" />
 
 ## Usage
 - Clone the repository:
