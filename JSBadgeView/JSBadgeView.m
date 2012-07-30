@@ -31,7 +31,7 @@
 
 #define kMarginToDrawInside (kBadgeStrokeWidth * 2)
 
-#define kShadowOffset CGSizeMake(0.0f, 2.0f)
+#define kShadowOffset CGSizeMake(0.0f, 3.0f)
 #define kShadowOpacity 0.4f
 #define kShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
 #define kShadowRadius 1.0f
