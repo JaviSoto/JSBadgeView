@@ -238,7 +238,6 @@
         _badgeText = [badgeText copy];
         
         [self setNeedsLayout];
-        [self setNeedsDisplay];
     }
 }
 
