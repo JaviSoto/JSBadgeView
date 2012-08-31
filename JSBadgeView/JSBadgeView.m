@@ -237,7 +237,7 @@
     {
         _badgeText = [badgeText copy];
         
-        [self setNeedsDisplay];
+        [self setNeedsLayout];
     }
 }
 
