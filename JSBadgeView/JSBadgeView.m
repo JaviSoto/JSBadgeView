@@ -145,8 +145,8 @@
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
         case JSBadgeViewAlignmentBottomLeft:
-            newFrame.origin.x = -textWidth / 2.0f;
-            newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
+            newFrame.origin.x = -viewWidth / 2.0f;
+            newFrame.origin.y = superviewHeight - (viewHeight / 2.0f);
             break;
         case JSBadgeViewAlignmentBottomRight:
             newFrame.origin.x = superviewWidth - (viewWidth / 2.0f);
