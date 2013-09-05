@@ -43,26 +43,7 @@
 
 #define kDefaultBadgeAlignment JSBadgeViewAlignmentTopRight
 
-@interface JSBadgeView()
-
-- (void)_init;
-- (CGSize)sizeOfTextForCurrentSettings;
-
-@end
-
 @implementation JSBadgeView
-
-@synthesize badgeAlignment = _badgeAlignment;
-
-@synthesize badgePositionAdjustment = _badgePositionAdjustment;
-@synthesize frameToPositionInRelationWith = _frameToPositionInRelationWith;
-
-@synthesize badgeText = _badgeText;
-@synthesize badgeTextColor = _badgeTextColor;
-@synthesize badgeTextShadowColor = _badgeTextShadowColor;
-@synthesize badgeTextShadowOffset = _badgeTextShadowOffset;
-@synthesize badgeTextFont = _badgeTextFont;
-@synthesize badgeBackgroundColor = _badgeBackgroundColor;
 
 - (void)awakeFromNib
 {
