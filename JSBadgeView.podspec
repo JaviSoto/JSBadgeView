@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name     = 'JSBadgeView'
   s.version  = '1.0'
   s.platform = :ios
-  s.license  = 'Apache 2.0'
+  s.license  = 'MIT'
   s.summary  = 'Customizable UIKit badge view like the one on applications in the iOS springboard.'
   s.homepage = 'https://github.com/JaviSoto/JSBadgeView'
   s.author   = { 'Javier Soto' => 'ios@javisoto.es' }
