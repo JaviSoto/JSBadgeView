@@ -18,6 +18,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#if !__has_feature(objc_arc)
+#error JSBadgeView must be compiled with ARC.
+#endif
+
 #define kDefaultBadgeTextColor [UIColor whiteColor]
 #define kDefaultBadgeBackgroundColor [UIColor redColor]
 #define kDefaultOverlayColor [UIColor colorWithWhite:1.0f alpha:0.3]
