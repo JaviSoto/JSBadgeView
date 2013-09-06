@@ -29,6 +29,10 @@ badgeView.badgeText = @"3";
 ```
 - Check the header file for all the things you can customize.
 
+## [CocoaPods](http://cocoapods.org/):
+- Add `pod 'JSBadgeView', '~> 1.1'` to your `Podfile`.
+- You're done!
+
 ## `UIAppearance`
 - You can customize all `JSBadgeView`s in your application, or the ones that are subviews of a specific type of view, using `UIAppearance`. Example:
 
