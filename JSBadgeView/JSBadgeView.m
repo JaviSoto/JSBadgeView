@@ -258,7 +258,7 @@
     {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         
-        CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
+        const CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
         
         UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(kBadgeCornerRadius, kBadgeCornerRadius)];
         
@@ -274,7 +274,7 @@
         }
         CGContextRestoreGState(ctx);
         
-        BOOL colorForOverlayPresent = self.badgeOverlayColor && ![self.badgeOverlayColor isEqual:[UIColor clearColor]];
+        const BOOL colorForOverlayPresent = self.badgeOverlayColor && ![self.badgeOverlayColor isEqual:[UIColor clearColor]];
         
         if (colorForOverlayPresent)
         {
@@ -284,17 +284,17 @@
                 CGContextAddPath(ctx, borderPath.CGPath);
                 CGContextClip(ctx);
                 
-                CGFloat height = rectToDraw.size.height;
-                CGFloat width = rectToDraw.size.width;
+                const CGFloat height = rectToDraw.size.height;
+                const CGFloat width = rectToDraw.size.width;
                 
-                CGRect rectForOverlayCircle = CGRectMake(rectToDraw.origin.x,
-                                                         rectToDraw.origin.y - ceilf(height * 0.5),
-                                                         width,
-                                                         height);
-                
+                const CGRect rectForOverlayCircle = CGRectMake(rectToDraw.origin.x,
+                                                               rectToDraw.origin.y - ceilf(height * 0.5),
+                                                               width,
+                                                               height);
+
                 CGContextAddEllipseInRect(ctx, rectForOverlayCircle);
                 CGContextSetFillColorWithColor(ctx, self.badgeOverlayColor.CGColor);
-                
+
                 CGContextDrawPath(ctx, kCGPathFill);
             }
             CGContextRestoreGState(ctx);
@@ -319,7 +319,7 @@
             CGContextSetShadowWithColor(ctx, self.badgeTextShadowOffset, 1.0, self.badgeTextShadowColor.CGColor);
             
             CGRect textFrame = rectToDraw;
-            CGSize textSize = [self sizeOfTextForCurrentSettings];
+            const CGSize textSize = [self sizeOfTextForCurrentSettings];
             
             textFrame.size.height = textSize.height;
             textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
