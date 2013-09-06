@@ -22,8 +22,9 @@ THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    JSBadgeViewAlignmentTopLeft,
+typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
+{
+    JSBadgeViewAlignmentTopLeft = 1,
     JSBadgeViewAlignmentTopRight,
     JSBadgeViewAlignmentTopCenter,
     JSBadgeViewAlignmentCenterLeft,
@@ -32,7 +33,7 @@ typedef enum {
     JSBadgeViewAlignmentBottomRight,
     JSBadgeViewAlignmentBottomCenter,
     JSBadgeViewAlignmentCenter
-} JSBadgeViewAlignment;
+};
 
 @interface JSBadgeView : UIView
 

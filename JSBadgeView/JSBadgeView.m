@@ -99,17 +99,19 @@
 #pragma mark - Layout
 
 - (void)layoutSubviews
-{    
+{
+    [super layoutSubviews];
+
     CGRect newFrame = self.frame;
-    CGRect superviewFrame = CGRectIsEmpty(_frameToPositionInRelationWith) ? self.superview.frame : _frameToPositionInRelationWith;
+    const CGRect superviewBounds = CGRectIsEmpty(_frameToPositionInRelationWith) ? self.superview.bounds : _frameToPositionInRelationWith;
     
-    CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
+    const CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
     
-    CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2);
-    CGFloat viewHeight = kBadgeHeight + (kMarginToDrawInside * 2);
+    const CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2);
+    const CGFloat viewHeight = kBadgeHeight + (kMarginToDrawInside * 2);
     
-    CGFloat superviewWidth = superviewFrame.size.width;
-    CGFloat superviewHeight = superviewFrame.size.height;
+    const CGFloat superviewWidth = superviewBounds.size.width;
+    const CGFloat superviewHeight = superviewBounds.size.height;
     
     newFrame.size.width = viewWidth;
     newFrame.size.height = viewHeight;
@@ -177,39 +179,6 @@
     if (badgeAlignment != _badgeAlignment)
     {
         _badgeAlignment = badgeAlignment;
-
-        switch (badgeAlignment)
-        {
-            case JSBadgeViewAlignmentTopLeft:
-                self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
-                break;
-            case JSBadgeViewAlignmentTopRight:
-                self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
-                break;
-            case JSBadgeViewAlignmentTopCenter:
-                self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-                break;
-            case JSBadgeViewAlignmentCenterLeft:
-                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
-                break;
-            case JSBadgeViewAlignmentCenterRight:
-                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
-                break;
-            case JSBadgeViewAlignmentBottomLeft:
-                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
-                break;
-            case JSBadgeViewAlignmentBottomRight:
-                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-                break;
-            case JSBadgeViewAlignmentBottomCenter:
-                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-                break;
-            case JSBadgeViewAlignmentCenter:
-                self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-                break;
-            default:
-                NSAssert(NO, @"Unimplemented JSBadgeAligment type %d", self.badgeAlignment);
-        }
 
         [self setNeedsLayout];
     }
@@ -283,7 +252,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    BOOL anyTextToDraw = (self.badgeText.length > 0);
+    const BOOL anyTextToDraw = (self.badgeText.length > 0);
     
     if (anyTextToDraw)
     {
