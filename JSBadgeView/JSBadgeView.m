@@ -76,7 +76,7 @@
 {
     if ((self = [self initWithFrame:CGRectZero]))
     {
-        self.badgeAlignment = alignment;
+        _badgeAlignment = alignment;
         [parentView addSubview:self];
     }
     
@@ -87,13 +87,13 @@
 {    
     self.backgroundColor = [UIColor clearColor];
     
-    self.badgeAlignment = kDefaultBadgeAlignment;
+    _badgeAlignment = kDefaultBadgeAlignment;
     
-    self.badgeBackgroundColor = kDefaultBadgeBackgroundColor;
-    self.badgeOverlayColor = kDefaultOverlayColor;
-    self.badgeTextColor = kDefaultBadgeTextColor;
-    self.badgeTextShadowColor = kDefaultBadgeShadowColor;
-    self.badgeTextFont = kDefaultBadgeTextFont;
+    _badgeBackgroundColor = kDefaultBadgeBackgroundColor;
+    _badgeOverlayColor = kDefaultOverlayColor;
+    _badgeTextColor = kDefaultBadgeTextColor;
+    _badgeTextShadowColor = kDefaultBadgeShadowColor;
+    _badgeTextFont = kDefaultBadgeTextFont;
 }
 
 #pragma mark - Layout

@@ -40,31 +40,31 @@ typedef enum {
 
 #pragma mark - Customization
 
-@property (nonatomic, assign) JSBadgeViewAlignment badgeAlignment;
+@property (nonatomic, assign) JSBadgeViewAlignment badgeAlignment UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, strong) UIColor *badgeTextColor;
-@property (nonatomic, assign) CGSize badgeTextShadowOffset;
-@property (nonatomic, strong) UIColor *badgeTextShadowColor;
+@property (nonatomic, strong) UIColor *badgeTextColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) CGSize badgeTextShadowOffset UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *badgeTextShadowColor UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, strong) UIFont *badgeTextFont;
+@property (nonatomic, strong) UIFont *badgeTextFont UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, strong) UIColor *badgeBackgroundColor;
+@property (nonatomic, strong) UIColor *badgeBackgroundColor UI_APPEARANCE_SELECTOR;
 
 /**
  * @discussion color of the overlay circle at the top. Default is semi-transparent white.
  */
-@property (nonatomic, strong) UIColor *badgeOverlayColor;
+@property (nonatomic, strong) UIColor *badgeOverlayColor UI_APPEARANCE_SELECTOR;
 
 /**
  * @discussion allows to shift the badge by x and y points.
  */
-@property (nonatomic, assign) CGPoint badgePositionAdjustment;
+@property (nonatomic, assign) CGPoint badgePositionAdjustment UI_APPEARANCE_SELECTOR;
 
 /**
  * @discussion (optional) If not provided, the superview frame is used.
  * You can use this to position the view if you're drawing it using drawRect instead of `-addSubview:`
  */
-@property (nonatomic, assign) CGRect frameToPositionInRelationWith;
+@property (nonatomic, assign) CGRect frameToPositionInRelationWith UI_APPEARANCE_SELECTOR;
 
 /**
  * @discussion optionally init using this method to have the badge automatically added to another view.

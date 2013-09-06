@@ -29,9 +29,13 @@ badgeView.badgeText = @"3";
 ```
 - Check the header file for all the things you can customize.
 
-## Dependencies
+## `UIAppearance`
+- You can customize all `JSBadgeView`s in your application, or the ones that are subviews of a specific type of view, using `UIAppearance`. Example:
 
-```JSBadgeView``` requires your application to be linked against the ```QuartzCore.framework``` framework.
+```objc
+[[JSBadgeView appearance] setBadgeBackgroundColor:[UIColor blackColor]];
+[[JSBadgeView appearance] setBadgeAlignment:@(JSBadgeViewAlignmentTopRight)];
+```
 
 ## Compatibility
 - Supports ARC. If you want to use it in a project without ARC, mark ```JSBadgeView.m``` with the linker flag ```-fobjc-arc```.
