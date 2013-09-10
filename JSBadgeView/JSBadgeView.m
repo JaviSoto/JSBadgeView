@@ -36,14 +36,14 @@
 
 #define kDefaultBadgeShadowColor [UIColor clearColor]
 
-#define kBadgeStrokeColor [UIColor whiteColor]
+#define kDefaultBadgeStrokeColor [UIColor whiteColor]
 #define kBadgeStrokeWidth 2.0f
 
 #define kMarginToDrawInside (kBadgeStrokeWidth * 2)
 
 #define kShadowOffset CGSizeMake(0.0f, 3.0f)
 #define kShadowOpacity 0.4f
-#define kShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
+#define kDefaultShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
 #define kShadowRadius 1.0f
 
 #define kBadgeHeight 16.0f
@@ -94,6 +94,8 @@
     _badgeTextColor = kDefaultBadgeTextColor;
     _badgeTextShadowColor = kDefaultBadgeShadowColor;
     _badgeTextFont = kDefaultBadgeTextFont;
+    _badgeShadowColor = kDefaultBadgeShadowColor;
+    _badgeStrokeColor = kDefaultBadgeStrokeColor;
 }
 
 #pragma mark - Layout
@@ -248,6 +250,26 @@
     }
 }
 
+- (void)setBadgeStrokeColor:(UIColor *)badgeStrokeColor
+{
+    if (badgeStrokeColor != _badgeStrokeColor)
+    {
+        _badgeStrokeColor = badgeStrokeColor;
+        
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setBadgeShadowColor:(UIColor *)badgeShadowColor
+{
+    if (badgeShadowColor != _badgeShadowColor)
+    {
+        _badgeShadowColor = badgeShadowColor;
+        
+        [self setNeedsDisplay];
+    }
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect
@@ -268,7 +290,7 @@
             CGContextAddPath(ctx, borderPath.CGPath);
             
             CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
+            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, self.badgeShadowColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathFill);
         }
@@ -306,7 +328,7 @@
             CGContextAddPath(ctx, borderPath.CGPath);
             
             CGContextSetLineWidth(ctx, kBadgeStrokeWidth);
-            CGContextSetStrokeColorWithColor(ctx, kBadgeStrokeColor.CGColor);
+            CGContextSetStrokeColorWithColor(ctx, self.badgeStrokeColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathStroke);
         }

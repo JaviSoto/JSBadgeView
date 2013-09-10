@@ -57,6 +57,16 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 @property (nonatomic, strong) UIColor *badgeOverlayColor UI_APPEARANCE_SELECTOR;
 
 /**
+ * @discussion color of the badge shadow. Default is semi-transparent black.
+ */
+@property (nonatomic, strong) UIColor *badgeShadowColor UI_APPEARANCE_SELECTOR;
+
+/**
+ * @discussion color of the circle around the badge. Default is white.
+ */
+@property (nonatomic, strong) UIColor *badgeStrokeColor UI_APPEARANCE_SELECTOR;
+
+/**
  * @discussion allows to shift the badge by x and y points.
  */
 @property (nonatomic, assign) CGPoint badgePositionAdjustment UI_APPEARANCE_SELECTOR;
