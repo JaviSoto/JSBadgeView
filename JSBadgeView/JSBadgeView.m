@@ -94,6 +94,8 @@
     _badgeTextColor = kDefaultBadgeTextColor;
     _badgeTextShadowColor = kDefaultBadgeShadowColor;
     _badgeTextFont = kDefaultBadgeTextFont;
+    _badgeShadowColor = kDefaultBadgeShadowColor;
+    _badgeStrokeColor = kBadgeStrokeColor;
 }
 
 #pragma mark - Layout
@@ -268,7 +270,7 @@
             CGContextAddPath(ctx, borderPath.CGPath);
             
             CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
+            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, self.badgeShadowColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathFill);
         }
@@ -306,7 +308,7 @@
             CGContextAddPath(ctx, borderPath.CGPath);
             
             CGContextSetLineWidth(ctx, kBadgeStrokeWidth);
-            CGContextSetStrokeColorWithColor(ctx, kBadgeStrokeColor.CGColor);
+            CGContextSetStrokeColorWithColor(ctx, self.badgeStrokeColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathStroke);
         }
