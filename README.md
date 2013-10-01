@@ -30,7 +30,7 @@ badgeView.badgeText = @"3";
 - Check the header file for all the things you can customize.
 
 ## [CocoaPods](http://cocoapods.org/):
-- Add `pod 'JSBadgeView', '~> 1.2.0'` to your `Podfile`.
+- Add `pod 'JSBadgeView', '~> 1.3.0'` to your `Podfile`.
 - You're done!
 
 ## `UIAppearance`
