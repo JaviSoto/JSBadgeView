@@ -7,7 +7,7 @@ Very optimized for performance: drawn entirely using CoreGraphics.
 
 iOS 7 style:
 
-<img sr="http://f.cl.ly/items/3y3R2O3t0k141R091z1R/JSBadgeView-iOS7.png" />
+<img sr="http://cl.ly/image/3G3J2k3n133W/JSBadgeView-iOS7.png" />
 
 ## Usage
 - Clone the repository:
