@@ -52,33 +52,33 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 @property (nonatomic, strong) UIColor *badgeBackgroundColor UI_APPEARANCE_SELECTOR;
 
 /**
- * @discussion color of the overlay circle at the top. Default is semi-transparent white.
+ * Color of the overlay circle at the top. Default is semi-transparent white.
  */
 @property (nonatomic, strong) UIColor *badgeOverlayColor UI_APPEARANCE_SELECTOR;
 
 /**
- * @discussion color of the badge shadow. Default is semi-transparent black.
+ * Color of the badge shadow. Default is semi-transparent black.
  */
 @property (nonatomic, strong) UIColor *badgeShadowColor UI_APPEARANCE_SELECTOR;
 
 /**
- * @discussion color of the circle around the badge. Default is white.
+ * Color of the circle around the badge. Default is white.
  */
 @property (nonatomic, strong) UIColor *badgeStrokeColor UI_APPEARANCE_SELECTOR;
 
 /**
- * @discussion allows to shift the badge by x and y points.
+ * Allows to shift the badge by x and y points.
  */
 @property (nonatomic, assign) CGPoint badgePositionAdjustment UI_APPEARANCE_SELECTOR;
 
 /**
- * @discussion (optional) If not provided, the superview frame is used.
  * You can use this to position the view if you're drawing it using drawRect instead of `-addSubview:`
+ * (optional) If not provided, the superview frame is used.
  */
 @property (nonatomic, assign) CGRect frameToPositionInRelationWith UI_APPEARANCE_SELECTOR;
 
 /**
- * @discussion optionally init using this method to have the badge automatically added to another view.
+ * Optionally init using this method to have the badge automatically added to another view.
  */
 - (id)initWithParentView:(UIView *)parentView alignment:(JSBadgeViewAlignment)alignment;
 
