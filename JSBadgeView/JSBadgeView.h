@@ -62,6 +62,16 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 @property (nonatomic, strong) UIColor *badgeShadowColor UI_APPEARANCE_SELECTOR;
 
 /**
+ * Offset of the badge shadow. Default is 3.0 points down.
+ */
+@property (nonatomic, assign) CGSize badgeShadowSize UI_APPEARANCE_SELECTOR;
+
+/**
+ * Width of the circle around the badge. Default is 2.0 points.
+ */
+@property (nonatomic, assign) CGFloat badgeStrokeWidth UI_APPEARANCE_SELECTOR;
+
+/**
  * Color of the circle around the badge. Default is white.
  */
 @property (nonatomic, strong) UIColor *badgeStrokeColor UI_APPEARANCE_SELECTOR;
