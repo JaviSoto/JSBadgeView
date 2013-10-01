@@ -5,6 +5,10 @@ Very optimized for performance: drawn entirely using CoreGraphics.
 
 <img src="http://f.cl.ly/items/1L3k0z0a3X3i353M1G0h/JSBadgeView.png" />
 
+iOS 7 style:
+
+<img sr="http://f.cl.ly/items/2x1J2P1M3t1w113g0j3M/Screen%20Shot%202013-09-30%20at%207.45.26%20PM.png" />
+
 ## Usage
 - Clone the repository:
 
@@ -37,7 +41,7 @@ badgeView.badgeText = @"3";
 - You can customize all `JSBadgeView`s in your application, or the ones that are subviews of a specific type of view, using `UIAppearance`. Example:
 
 ```objc
-[[JSBadgeView appearance] setBadgeBackgroundColor:[UIColor blackColor]];
+[[JSBadgeView appearance] setBadgeBackgroundColor:UIColor.blackColor];
 [[JSBadgeView appearance] setBadgeAlignment:@(JSBadgeViewAlignmentTopRight)];
 ```
 
