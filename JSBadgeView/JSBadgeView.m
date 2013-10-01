@@ -28,48 +28,90 @@
 #error JSBadgeView must be compiled with ARC.
 #endif
 
-#define kDefaultBadgeTextColor [UIColor whiteColor]
-#define kDefaultBadgeBackgroundColor [UIColor redColor]
-#define kDefaultOverlayColor [UIColor colorWithWhite:1.0f alpha:0.3]
+static const CGFloat JSBadgeViewShadowRadius = 1.0f;
+static const CGFloat JSBadgeViewHeight = 16.0f;
+static const CGFloat JSBadgeViewTextSideMargin = 8.0f;
+static const CGFloat JSBadgeViewCornerRadius = 10.0f;
 
-#define kDefaultBadgeTextFont [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]
+// Thanks to Peter Steinberger: https://gist.github.com/steipete/6526860
+static BOOL JSBadgeViewIsUIKitFlatMode(void)
+{
+    static BOOL isUIKitFlatMode = NO;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+#ifndef kCFCoreFoundationVersionNumber_iOS_7_0
+#define kCFCoreFoundationVersionNumber_iOS_7_0 847.2
+#endif
 
-#define kDefaultBadgeShadowColor [UIColor clearColor]
+        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0)
+        {
+            // If your app is running in legacy mode, tintColor will be nil - else it must be set to some color.
+            if (UIApplication.sharedApplication.keyWindow)
+            {
+                isUIKitFlatMode = [UIApplication.sharedApplication.keyWindow performSelector:@selector(tintColor)] != nil;
+            }
+            else
+            {
+                // Possible that we're called early on (e.g. when used in a Storyboard). Adapt and use a temporary window.
+                isUIKitFlatMode = [[[UIWindow alloc] init] performSelector:@selector(tintColor)] != nil;
+            }
+        }
+    });
 
-#define kDefaultBadgeStrokeColor [UIColor whiteColor]
-#define kBadgeStrokeWidth 2.0f
-
-#define kMarginToDrawInside (kBadgeStrokeWidth * 2)
-
-#define kShadowOffset CGSizeMake(0.0f, 3.0f)
-#define kShadowOpacity 0.4f
-#define kDefaultShadowColor [UIColor colorWithWhite:0.0f alpha:kShadowOpacity]
-#define kShadowRadius 1.0f
-
-#define kBadgeHeight 16.0f
-#define kBadgeTextSideMargin 8.0f
-
-#define kBadgeCornerRadius 10.0f
-
-#define kDefaultBadgeAlignment JSBadgeViewAlignmentTopRight
+    return isUIKitFlatMode;
+}
 
 @implementation JSBadgeView
 
-- (void)awakeFromNib
++ (void)applyCommonStyle
 {
-    [super awakeFromNib];
+    JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
 
-    [self _init];
+    badgeViewAppearanceProxy.backgroundColor = UIColor.clearColor;
+    badgeViewAppearanceProxy.badgeAlignment = JSBadgeViewAlignmentTopRight;
+    badgeViewAppearanceProxy.badgeBackgroundColor = UIColor.redColor;
+    badgeViewAppearanceProxy.badgeTextFont = [UIFont boldSystemFontOfSize:UIFont.systemFontSize];
+    badgeViewAppearanceProxy.badgeTextColor = UIColor.whiteColor;
 }
 
-- (id)initWithFrame:(CGRect)frame
++ (void)applyLegacyStyle
 {
-    if ((self = [super initWithFrame:frame]))
-    {
-        [self _init];
-    }
+    JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
 
-    return self;
+    badgeViewAppearanceProxy.badgeOverlayColor = [UIColor colorWithWhite:1.0f alpha:0.3];
+    badgeViewAppearanceProxy.badgeTextShadowColor = UIColor.clearColor;
+    badgeViewAppearanceProxy.badgeShadowColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    badgeViewAppearanceProxy.badgeShadowSize = CGSizeMake(0.0f, 3.0f);
+    badgeViewAppearanceProxy.badgeStrokeWidth = 2.0f;
+    badgeViewAppearanceProxy.badgeStrokeColor = UIColor.whiteColor;
+}
+
++ (void)applyIOS7Style
+{
+    JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
+
+    badgeViewAppearanceProxy.badgeOverlayColor = UIColor.clearColor;
+    badgeViewAppearanceProxy.badgeTextShadowColor = UIColor.clearColor;
+    badgeViewAppearanceProxy.badgeShadowColor = UIColor.clearColor;
+    badgeViewAppearanceProxy.badgeStrokeWidth = 0.0f;
+    badgeViewAppearanceProxy.badgeStrokeColor = badgeViewAppearanceProxy.badgeBackgroundColor;
+}
+
++ (void)initialize
+{
+    if (self == JSBadgeView.class)
+    {
+        [self applyCommonStyle];
+
+        if (JSBadgeViewIsUIKitFlatMode())
+        {
+            [self applyIOS7Style];
+        }
+        else
+        {
+            [self applyLegacyStyle];
+        }
+    }
 }
 
 - (id)initWithParentView:(UIView *)parentView alignment:(JSBadgeViewAlignment)alignment
@@ -83,22 +125,12 @@
     return self;
 }
 
-- (void)_init
-{    
-    self.backgroundColor = [UIColor clearColor];
-    
-    _badgeAlignment = kDefaultBadgeAlignment;
-    
-    _badgeBackgroundColor = kDefaultBadgeBackgroundColor;
-    _badgeOverlayColor = kDefaultOverlayColor;
-    _badgeTextColor = kDefaultBadgeTextColor;
-    _badgeTextShadowColor = kDefaultBadgeShadowColor;
-    _badgeTextFont = kDefaultBadgeTextFont;
-    _badgeShadowColor = kDefaultBadgeShadowColor;
-    _badgeStrokeColor = kDefaultBadgeStrokeColor;
-}
-
 #pragma mark - Layout
+
+- (CGFloat)marginToDrawInside
+{
+    return self.badgeStrokeWidth * 2.0f;
+}
 
 - (void)layoutSubviews
 {
@@ -108,9 +140,10 @@
     const CGRect superviewBounds = CGRectIsEmpty(_frameToPositionInRelationWith) ? self.superview.bounds : _frameToPositionInRelationWith;
     
     const CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
-    
-    const CGFloat viewWidth = textWidth + kBadgeTextSideMargin + (kMarginToDrawInside * 2);
-    const CGFloat viewHeight = kBadgeHeight + (kMarginToDrawInside * 2);
+
+    const CGFloat marginToDrawInside = [self marginToDrawInside];
+    const CGFloat viewWidth = textWidth + JSBadgeViewTextSideMargin + (marginToDrawInside * 2);
+    const CGFloat viewHeight = JSBadgeViewHeight + (marginToDrawInside * 2);
     
     const CGFloat superviewWidth = superviewBounds.size.width;
     const CGFloat superviewHeight = superviewBounds.size.height;
@@ -250,6 +283,17 @@
     }
 }
 
+- (void)setBadgeStrokeWidth:(CGFloat)badgeStrokeWidth
+{
+    if (badgeStrokeWidth != _badgeStrokeWidth)
+    {
+        _badgeStrokeWidth = badgeStrokeWidth;
+
+        [self setNeedsLayout];
+        [self setNeedsDisplay];
+    }
+}
+
 - (void)setBadgeStrokeColor:(UIColor *)badgeStrokeColor
 {
     if (badgeStrokeColor != _badgeStrokeColor)
@@ -270,6 +314,16 @@
     }
 }
 
+- (void)setBadgeShadowSize:(CGSize)badgeShadowSize
+{
+    if (!CGSizeEqualToSize(badgeShadowSize, _badgeShadowSize))
+    {
+        _badgeShadowSize = badgeShadowSize;
+
+        [self setNeedsDisplay];
+    }
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect
@@ -279,10 +333,11 @@
     if (anyTextToDraw)
     {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
+
+        const CGFloat marginToDrawInside = [self marginToDrawInside];
+        const CGRect rectToDraw = CGRectInset(rect, marginToDrawInside, marginToDrawInside);
         
-        const CGRect rectToDraw = CGRectInset(rect, kMarginToDrawInside, kMarginToDrawInside);
-        
-        UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(kBadgeCornerRadius, kBadgeCornerRadius)];
+        UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(JSBadgeViewCornerRadius, JSBadgeViewCornerRadius)];
         
         /* Background and shadow */
         CGContextSaveGState(ctx);
@@ -290,7 +345,7 @@
             CGContextAddPath(ctx, borderPath.CGPath);
             
             CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, self.badgeShadowColor.CGColor);
+            CGContextSetShadowWithColor(ctx, self.badgeShadowSize, JSBadgeViewShadowRadius, self.badgeShadowColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathFill);
         }
@@ -327,7 +382,7 @@
         {
             CGContextAddPath(ctx, borderPath.CGPath);
             
-            CGContextSetLineWidth(ctx, kBadgeStrokeWidth);
+            CGContextSetLineWidth(ctx, self.badgeStrokeWidth);
             CGContextSetStrokeColorWithColor(ctx, self.badgeStrokeColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathStroke);
