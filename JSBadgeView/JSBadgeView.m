@@ -196,8 +196,8 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     newFrame.origin.y += _badgePositionAdjustment.y;
     
     // Do not set frame directly so we do not interfere with any potential transform set on the view.
-    self.center = CGPointMake(CGRectGetMidX(newFrame), CGRectGetMidY(newFrame));
     self.bounds = CGRectIntegral(newFrame);
+    self.center = CGPointMake(CGRectGetMidX(newFrame), CGRectGetMidY(newFrame));
     
     [self setNeedsDisplay];
 }
