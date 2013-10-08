@@ -197,7 +197,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     
     // Do not set frame directly so we do not interfere with any potential transform set on the view.
     self.bounds = CGRectIntegral(CGRectMake(0, 0, CGRectGetWidth(newFrame), CGRectGetHeight(newFrame)));
-    self.center = CGPointMake(CGRectGetMidX(newFrame), CGRectGetMidY(newFrame));
+    self.center = CGPointMake(ceilf(CGRectGetMidX(newFrame)), ceilf(CGRectGetMidY(newFrame)));
     
     [self setNeedsDisplay];
 }
