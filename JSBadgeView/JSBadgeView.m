@@ -392,6 +392,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
         CGContextRestoreGState(ctx);
         
         /* Text */
+
         CGContextSaveGState(ctx);
         {
             CGContextSetFillColorWithColor(ctx, self.badgeTextColor.CGColor);
@@ -405,8 +406,8 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
             
             [self.badgeText drawInRect:textFrame
                               withFont:self.badgeTextFont
-                         lineBreakMode:UILineBreakModeCharacterWrap
-                             alignment:UITextAlignmentCenter];
+                         lineBreakMode:NSLineBreakByClipping
+                             alignment:NSTextAlignmentCenter];
         }
         CGContextRestoreGState(ctx);
     }
