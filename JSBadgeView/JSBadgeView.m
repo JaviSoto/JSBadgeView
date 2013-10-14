@@ -28,6 +28,18 @@
 #error JSBadgeView must be compiled with ARC.
 #endif
 
+// Silencing some deprecation warnings if your deployment target is iOS7 that can only be fixed by using methods that
+// Are only available on iOS7.
+// Soon JSBadgeView will require iOS 7 and we'll be able to use the new methods.
+#if  __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_0
+    #define JSBadgeViewSilenceDeprecatedMethodStart()   _Pragma("clang diagnostic push") \
+                                                        _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")
+    #define JSBadgeViewSilenceDeprecatedMethodEnd()     _Pragma("clang diagnostic pop")
+#else
+    #define JSBadgeViewSilenceDeprecatedMethodStart()
+    #define JSBadgeViewSilenceDeprecatedMethodEnd()
+#endif
+
 static const CGFloat JSBadgeViewShadowRadius = 1.0f;
 static const CGFloat JSBadgeViewHeight = 16.0f;
 static const CGFloat JSBadgeViewTextSideMargin = 8.0f;
@@ -206,7 +218,9 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
 
 - (CGSize)sizeOfTextForCurrentSettings
 {
+    JSBadgeViewSilenceDeprecatedMethodStart();
     return [self.badgeText sizeWithFont:self.badgeTextFont];
+    JSBadgeViewSilenceDeprecatedMethodEnd();
 }
 
 #pragma mark - Setters
@@ -403,11 +417,13 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
             
             textFrame.size.height = textSize.height;
             textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
-            
+
+            JSBadgeViewSilenceDeprecatedMethodStart();
             [self.badgeText drawInRect:textFrame
                               withFont:self.badgeTextFont
                          lineBreakMode:NSLineBreakByClipping
                              alignment:NSTextAlignmentCenter];
+            JSBadgeViewSilenceDeprecatedMethodEnd();
         }
         CGContextRestoreGState(ctx);
     }
