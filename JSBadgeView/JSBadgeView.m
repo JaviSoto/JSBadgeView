@@ -130,7 +130,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
 {
     if ((self = [self initWithFrame:CGRectZero]))
     {
-        _badgeAlignment = alignment;
+        self.badgeAlignment = alignment;
         [parentView addSubview:self];
     }
     
