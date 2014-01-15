@@ -23,6 +23,7 @@
 #import "JSBadgeView.h"
 
 #import <QuartzCore/QuartzCore.h>
+#include <mach-o/dyld.h>
 
 #if !__has_feature(objc_arc)
 #error JSBadgeView must be compiled with ARC.
@@ -54,19 +55,12 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
 #ifndef kCFCoreFoundationVersionNumber_iOS_7_0
 #define kCFCoreFoundationVersionNumber_iOS_7_0 847.2
 #endif
-
-        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0)
-        {
-            // If your app is running in legacy mode, tintColor will be nil - else it must be set to some color.
-            if (UIApplication.sharedApplication.keyWindow)
-            {
-                isUIKitFlatMode = [UIApplication.sharedApplication.keyWindow performSelector:@selector(tintColor)] != nil;
-            }
-            else
-            {
-                // Possible that we're called early on (e.g. when used in a Storyboard). Adapt and use a temporary window.
-                isUIKitFlatMode = [[[UIWindow alloc] init] performSelector:@selector(tintColor)] != nil;
-            }
+#ifndef UIKitVersionNumber_iOS_7_0
+#define UIKitVersionNumber_iOS_7_0 0xB57
+#endif
+        // We get the modern UIKit if system is running >= iOS 7 and we were linked with >= SDK 7.
+        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0) {
+            isUIKitFlatMode = (NSVersionOfLinkTimeLibrary("UIKit") >> 16) >= UIKitVersionNumber_iOS_7_0;
         }
     });
 
