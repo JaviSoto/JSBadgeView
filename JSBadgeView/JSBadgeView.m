@@ -195,7 +195,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
         default:
-            NSAssert(NO, @"Unimplemented JSBadgeAligment type %d", self.badgeAlignment);
+            NSAssert(NO, @"Unimplemented JSBadgeAligment type %lul", (unsigned long)self.badgeAlignment);
     }
     
     newFrame.origin.x += _badgePositionAdjustment.x;
