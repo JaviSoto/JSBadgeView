@@ -21,15 +21,11 @@
 #define kMarginBetweenSquares 10.0f
 #define kSquareColor [UIColor colorWithRed:0.004 green:0.349 blue:0.616 alpha:1]
 
-@interface JSBadgeSamplesViewController ()
-
-@end
-
 @implementation JSBadgeSamplesViewController
 
-- (void)loadView
+- (void)viewDidLoad
 {
-    [super loadView];
+    [super viewDidLoad];
 
     self.view.backgroundColor = kViewBackgroundColor;
     
