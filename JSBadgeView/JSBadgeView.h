@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 
 #pragma mark - Customization
 
-@property (nonatomic, assign) JSBadgeViewAlignment badgeAlignment UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) JSBadgeViewAlignment badgeAlignment;
 
 @property (nonatomic, strong) UIColor *badgeTextColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic, assign) CGSize badgeTextShadowOffset UI_APPEARANCE_SELECTOR;
