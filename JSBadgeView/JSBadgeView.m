@@ -279,6 +279,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     {
         _badgeTextFont = badgeTextFont;
         
+        [self setNeedsLayout];
         [self setNeedsDisplay];
     }
 }
