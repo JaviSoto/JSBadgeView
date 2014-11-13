@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'JSBadgeView'
-  s.version  = '1.3.2'
+  s.version  = '1.4'
   s.platform = :ios
   s.license  = 'MIT'
   s.summary  = 'Customizable UIKit badge view like the one on applications in the iOS springboard.'
