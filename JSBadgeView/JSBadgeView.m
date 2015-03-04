@@ -148,7 +148,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     const CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
 
     const CGFloat marginToDrawInside = [self marginToDrawInside];
-    const CGFloat viewWidth = textWidth + JSBadgeViewTextSideMargin + (marginToDrawInside * 2);
+    const CGFloat viewWidth = MAX(_badgeMinWidth, textWidth + JSBadgeViewTextSideMargin + (marginToDrawInside * 2));
     const CGFloat viewHeight = JSBadgeViewHeight + (marginToDrawInside * 2);
     
     const CGFloat superviewWidth = superviewBounds.size.width;
