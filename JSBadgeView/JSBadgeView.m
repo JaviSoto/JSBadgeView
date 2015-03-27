@@ -155,7 +155,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     const CGFloat superviewHeight = superviewBounds.size.height;
     
     newFrame.size.width = MAX(viewWidth, viewHeight);
-    newFrame.size.height = MAX(viewHeight, viewWidth);
+    newFrame.size.height = viewHeight;
     
     switch (self.badgeAlignment) {
         case JSBadgeViewAlignmentTopLeft:
