@@ -88,7 +88,7 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 @property (nonatomic, assign) CGRect frameToPositionInRelationWith UI_APPEARANCE_SELECTOR;
 
 /**
- * The minimal width of a badge circle. We need this to avoid elipse shapes when using small fonts.
+ * The minimum width of a badge circle. We need this to avoid elipse shapes when using small fonts.
  */
 @property (nonatomic, assign) CGFloat badgeMinWidth UI_APPEARANCE_SELECTOR;
 
