@@ -39,6 +39,13 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 
 @property (nonatomic, copy) NSString *badgeText;
 
+@property (nonatomic, assign) NSUInteger badgeNumber;
+
+/**
+ *  Hides badge view if badgeNumber is 0. Default is NO.
+ */
+@property (nonatomic, assign) BOOL hidesIfZero;
+
 #pragma mark - Customization
 
 @property (nonatomic, assign) JSBadgeViewAlignment badgeAlignment UI_APPEARANCE_SELECTOR;
