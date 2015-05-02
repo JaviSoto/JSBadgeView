@@ -74,7 +74,6 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
 
     badgeViewAppearanceProxy.backgroundColor = UIColor.clearColor;
-    badgeViewAppearanceProxy.badgeAlignment = JSBadgeViewAlignmentTopRight;
     badgeViewAppearanceProxy.badgeBackgroundColor = UIColor.redColor;
     badgeViewAppearanceProxy.badgeTextFont = [UIFont boldSystemFontOfSize:UIFont.systemFontSize];
     badgeViewAppearanceProxy.badgeTextColor = UIColor.whiteColor;
@@ -193,6 +192,9 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
         case JSBadgeViewAlignmentCenter:
             newFrame.origin.x = (superviewWidth - viewWidth) / 2.0f;
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
+        case JSBadgeViewAlignmentRight:
+            newFrame.origin.x = superviewWidth - viewWidth;
+            newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
         default:
             NSAssert(NO, @"Unimplemented JSBadgeAligment type %lul", (unsigned long)self.badgeAlignment);
@@ -279,6 +281,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     {
         _badgeTextFont = badgeTextFont;
         
+        [self setNeedsLayout];
         [self setNeedsDisplay];
     }
 }
