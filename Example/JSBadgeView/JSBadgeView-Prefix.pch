@@ -14,22 +14,13 @@
  limitations under the License.
  */
 
-#import "JSAppDelegate.h"
+#import <Availability.h>
 
-#import "JSBadgeSamplesViewController.h"
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
 
-@implementation JSAppDelegate
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
-    JSBadgeSamplesViewController *sampleVC = [[JSBadgeSamplesViewController alloc] init];
-    self.window.rootViewController = sampleVC;    
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
-}
-
-@end
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
