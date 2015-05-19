@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'JSBadgeView', :exclusive => true do
+  pod "JSBadgeView", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "JSBadgeView", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end

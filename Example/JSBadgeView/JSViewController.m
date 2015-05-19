@@ -1,12 +1,20 @@
-//
-//  JSBadgeSamplesViewController.m
-//  JSBadgeView_SampleProject
-//
-//  Created by Javier Soto on 7/24/12.
-//  Copyright (c) 2012 Javier Soto. All rights reserved.
-//
+/*
+ Copyright 2012 Javier Soto (ios@javisoto.es)
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
-#import "JSBadgeSamplesViewController.h"
+#import "JSViewController.h"
 
 #import "JSBadgeView.h"
 
@@ -21,16 +29,16 @@
 #define kMarginBetweenSquares 10.0f
 #define kSquareColor [UIColor colorWithRed:0.004 green:0.349 blue:0.616 alpha:1]
 
-@interface JSBadgeSamplesViewController ()
+@interface JSViewController ()
 
 @end
 
-@implementation JSBadgeSamplesViewController
+@implementation JSViewController
 
 - (void)loadView
 {
     [super loadView];
-
+    
     self.view.backgroundColor = kViewBackgroundColor;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
@@ -64,14 +72,14 @@
         rectangle.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
         rectangle.layer.shadowOpacity = 0.4;
         rectangle.layer.shadowRadius = 1.0;
-        rectangle.layer.shadowPath = rectangleShadowPath;        
+        rectangle.layer.shadowPath = rectangleShadowPath;
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:rectangle alignment:JSBadgeViewAlignmentTopRight];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
-
+        
         [scrollView addSubview:rectangle];
         [scrollView sendSubviewToBack:rectangle];
-                
+        
         xOffset += kSquareSideLength + kMarginBetweenSquares;
         
         if (xOffset > self.view.frame.size.width - kSquareSideLength)
