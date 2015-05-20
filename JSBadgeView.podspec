@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "JSBadgeView"
-  s.version          = '1.4'
+  s.version          = '1.4.1'
   s.summary          = "Customizable UIKit badge view like the one on applications in the iOS springboard."
   s.description      = "Customizable UIKit badge view like the one on applications in the iOS springboard. Very optimized for performance: drawn entirely using CoreGraphics."
   s.homepage         = "https://github.com/JaviSoto/JSBadgeView"
