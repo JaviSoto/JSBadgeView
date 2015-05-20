@@ -103,7 +103,9 @@
 				6003F58B195388D20070C39A /* Products */,
 				A8BD1E7E9863D8176568336D /* Pods */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
