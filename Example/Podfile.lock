@@ -1,6 +1,6 @@
 PODS:
   - Expecta (1.0.0)
-  - JSBadgeView (1.4)
+  - JSBadgeView (1.4.1)
   - Specta (1.0.0)
 
 DEPENDENCIES:
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
-  JSBadgeView: e787ce149cee94a924557b8b4ac39f645c48b814
+  JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   Specta: 96fe05fe5c7348b5223f85e862904f6e832abb14
 
 COCOAPODS: 0.37.1
