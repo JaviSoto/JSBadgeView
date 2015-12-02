@@ -41,10 +41,6 @@
     #define JSBadgeViewSilenceDeprecatedMethodEnd()
 #endif
 
-static const CGFloat JSBadgeViewShadowRadius = 1.0f;
-static const CGFloat JSBadgeViewHeight = 16.0f;
-static const CGFloat JSBadgeViewTextSideMargin = 8.0f;
-static const CGFloat JSBadgeViewCornerRadius = 10.0f;
 
 // Thanks to Peter Steinberger: https://gist.github.com/steipete/6526860
 static BOOL JSBadgeViewIsUIKitFlatMode(void)
@@ -78,6 +74,13 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     badgeViewAppearanceProxy.badgeBackgroundColor = UIColor.redColor;
     badgeViewAppearanceProxy.badgeTextFont = [UIFont boldSystemFontOfSize:UIFont.systemFontSize];
     badgeViewAppearanceProxy.badgeTextColor = UIColor.whiteColor;
+    badgeViewAppearanceProxy.badgeViewShadowRadius = 1.0f;
+    badgeViewAppearanceProxy.badgeViewHeight = 16.0f;
+    badgeViewAppearanceProxy.badgeViewTextSideMargin = 8.0f;
+    badgeViewAppearanceProxy.badgeViewCornerRadius = 10.0f;
+    badgeViewAppearanceProxy.tinyMode = NO;
+    badgeViewAppearanceProxy.tinyModeBackgroundColor = UIColor.redColor;
+    badgeViewAppearanceProxy.badgeViewTinyRadius = 5.0f;
 }
 
 + (void)applyLegacyStyle
@@ -131,6 +134,21 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     return self;
 }
 
+-(void) setTinyMode:(BOOL)tinyMode
+{
+    if ( tinyMode == self.tinyMode) {
+        return;
+    }
+    _tinyMode = tinyMode;
+    [self setNeedsLayout];
+}
+
+-(void)setBadgeBackgroundImage:(UIImage *)badgeBackgroundImage
+{
+    _badgeBackgroundImage = badgeBackgroundImage;
+    [self setNeedsLayout];
+}
+
 #pragma mark - Layout
 
 - (CGFloat)marginToDrawInside
@@ -141,18 +159,24 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    
+    
     CGRect newFrame = self.frame;
-    const CGRect superviewBounds = CGRectIsEmpty(_frameToPositionInRelationWith) ? self.superview.bounds : _frameToPositionInRelationWith;
+    const CGRect superviewBounds = CGRectIsEmpty(self.frameToPositionInRelationWith) ? self.superview.bounds : self.frameToPositionInRelationWith;
     
     const CGFloat textWidth = [self sizeOfTextForCurrentSettings].width;
-
+    
     const CGFloat marginToDrawInside = [self marginToDrawInside];
-    const CGFloat viewWidth = MAX(_badgeMinWidth, textWidth + JSBadgeViewTextSideMargin + (marginToDrawInside * 2));
-    const CGFloat viewHeight = JSBadgeViewHeight + (marginToDrawInside * 2);
+    CGFloat viewWidth = MAX(self.badgeMinWidth, textWidth + self.badgeViewTextSideMargin + (marginToDrawInside * 2));
+    CGFloat viewHeight = self.badgeViewHeight + (marginToDrawInside * 2);
     
     const CGFloat superviewWidth = superviewBounds.size.width;
     const CGFloat superviewHeight = superviewBounds.size.height;
+    
+    if (self.tinyMode) {
+        viewWidth = 2*(self.badgeViewTinyRadius+self.badgeViewShadowRadius);
+        viewHeight = viewWidth;
+    }
     
     newFrame.size.width = MAX(viewWidth, viewHeight);
     newFrame.size.height = viewHeight;
@@ -198,8 +222,8 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
             NSAssert(NO, @"Unimplemented JSBadgeAligment type %lul", (unsigned long)self.badgeAlignment);
     }
     
-    newFrame.origin.x += _badgePositionAdjustment.x;
-    newFrame.origin.y += _badgePositionAdjustment.y;
+    newFrame.origin.x += self.badgePositionAdjustment.x;
+    newFrame.origin.y += self.badgePositionAdjustment.y;
     
     // Do not set frame directly so we do not interfere with any potential transform set on the view.
     self.bounds = CGRectIntegral(CGRectMake(0, 0, CGRectGetWidth(newFrame), CGRectGetHeight(newFrame)));
@@ -339,32 +363,65 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
 
 - (void)drawRect:(CGRect)rect
 {
+    
     const BOOL anyTextToDraw = (self.badgeText.length > 0);
     
     if (anyTextToDraw)
     {
         CGContextRef ctx = UIGraphicsGetCurrentContext();
-
+        
         const CGFloat marginToDrawInside = [self marginToDrawInside];
         const CGRect rectToDraw = CGRectInset(rect, marginToDrawInside, marginToDrawInside);
         
-        UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(JSBadgeViewCornerRadius, JSBadgeViewCornerRadius)];
-        
-        /* Background and shadow */
-        CGContextSaveGState(ctx);
-        {
-            CGContextAddPath(ctx, borderPath.CGPath);
-            
-            CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-            CGContextSetShadowWithColor(ctx, self.badgeShadowSize, JSBadgeViewShadowRadius, self.badgeShadowColor.CGColor);
-            
-            CGContextDrawPath(ctx, kCGPathFill);
+        UIBezierPath *borderPath;
+        if (self.tinyMode) {
+            borderPath= [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(self.badgeViewTinyRadius+marginToDrawInside, self.badgeViewTinyRadius+marginToDrawInside)];
         }
-        CGContextRestoreGState(ctx);
+        else{
+            borderPath= [UIBezierPath bezierPathWithRoundedRect:rectToDraw byRoundingCorners:(UIRectCorner)UIRectCornerAllCorners cornerRadii:CGSizeMake(self.badgeViewCornerRadius, self.badgeViewCornerRadius)];
+        }
+        CGColorRef bgCGColor = self.tinyMode ? self.tinyModeBackgroundColor.CGColor : self.badgeBackgroundColor.CGColor;
+        
+        if (nil == self.badgeBackgroundImage) {
+            CGContextSetFillColorWithColor(ctx, bgCGColor);
+            /* Background and shadow */
+            CGContextSaveGState(ctx);
+            {
+                CGContextAddPath(ctx, borderPath.CGPath);
+                if (!self.tinyMode && self.badgeViewShadowRadius > 0 ) {
+                    CGContextSetShadowWithColor(ctx, self.badgeShadowSize, self.badgeViewShadowRadius, self.badgeShadowColor.CGColor);
+                }
+                
+                CGContextDrawPath(ctx, kCGPathFill);
+            }
+            CGContextRestoreGState(ctx);
+            
+        }
+        else{
+            
+            CGFloat width = self.badgeBackgroundImage.size.width;
+            CGFloat height = self.badgeBackgroundImage.size.height;
+            
+            float verticalRadio = rectToDraw.size.height*1.0/height;
+            float horizontalRadio = rectToDraw.size.width*1.0/width;
+            
+            float radio = 1;
+            radio = verticalRadio < horizontalRadio ? horizontalRadio : verticalRadio;
+            
+            CGRect displayRect = CGRectMake((rectToDraw.size.width - width*radio)/2.0f,
+                                            (rectToDraw.size.height-height*radio)/2.0f,
+                                            width*radio,
+                                            height*radio);
+            
+            [self.badgeBackgroundImage drawInRect:displayRect];
+            
+        }
+        
+        
         
         const BOOL colorForOverlayPresent = self.badgeOverlayColor && ![self.badgeOverlayColor isEqual:[UIColor clearColor]];
         
-        if (colorForOverlayPresent)
+        if ( colorForOverlayPresent)
         {
             /* Gradient overlay */
             CGContextSaveGState(ctx);
@@ -379,10 +436,10 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
                                                                rectToDraw.origin.y - ceilf(height * 0.5),
                                                                width,
                                                                height);
-
+                
                 CGContextAddEllipseInRect(ctx, rectForOverlayCircle);
                 CGContextSetFillColorWithColor(ctx, self.badgeOverlayColor.CGColor);
-
+                
                 CGContextDrawPath(ctx, kCGPathFill);
             }
             CGContextRestoreGState(ctx);
@@ -400,28 +457,36 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
         }
         CGContextRestoreGState(ctx);
         
+        if (self.tinyMode) {
+            return;
+        }
         /* Text */
-
+        
         CGContextSaveGState(ctx);
         {
             CGContextSetFillColorWithColor(ctx, self.badgeTextColor.CGColor);
-            CGContextSetShadowWithColor(ctx, self.badgeTextShadowOffset, 1.0, self.badgeTextShadowColor.CGColor);
+            if (self.badgeViewShadowRadius > 0) {
+                CGContextSetShadowWithColor(ctx, self.badgeTextShadowOffset, 1.0, self.badgeTextShadowColor.CGColor);
+            }
             
             CGRect textFrame = rectToDraw;
             const CGSize textSize = [self sizeOfTextForCurrentSettings];
             
             textFrame.size.height = textSize.height;
-            textFrame.origin.y = rectToDraw.origin.y + floorf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
-
-            JSBadgeViewSilenceDeprecatedMethodStart();
+            textFrame.origin.y = rectToDraw.origin.y + ceilf((rectToDraw.size.height - textFrame.size.height) / 2.0f);
+            
+            NSMutableParagraphStyle *textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+            textStyle.lineBreakMode = NSLineBreakByClipping;
+            textStyle.alignment = NSTextAlignmentCenter;
+            
             [self.badgeText drawInRect:textFrame
-                              withFont:self.badgeTextFont
-                         lineBreakMode:NSLineBreakByClipping
-                             alignment:NSTextAlignmentCenter];
-            JSBadgeViewSilenceDeprecatedMethodEnd();
+                        withAttributes:@{NSFontAttributeName:self.badgeTextFont,
+                                         NSParagraphStyleAttributeName: textStyle}];
+            
         }
         CGContextRestoreGState(ctx);
     }
 }
+
 
 @end
