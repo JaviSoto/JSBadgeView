@@ -20,7 +20,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define kNumBadges 120
+#define kNumBadges 100
 
 #define kViewBackgroundColor [UIColor colorWithRed:0.357 green:0.757 blue:0.357 alpha:1]
 
@@ -76,9 +76,7 @@
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:rectangle alignment:JSBadgeViewAlignmentTopRight];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
-        if (i >= 100) {
-            badgeView.tinyMode = YES;
-        }
+        
         [scrollView addSubview:rectangle];
         [scrollView sendSubviewToBack:rectangle];
         

@@ -93,42 +93,6 @@ typedef NS_ENUM(NSUInteger, JSBadgeViewAlignment)
 @property (nonatomic, assign) CGFloat badgeMinWidth UI_APPEARANCE_SELECTOR;
 
 /**
- * The margin add to the text left and right,both left and right use badgeViewTextSideMargin/2.
- */
-@property (nonatomic,assign) CGFloat badgeViewTextSideMargin UI_APPEARANCE_SELECTOR;
-
-/**
- * The corner radius use to the display rect.
- */
-@property (nonatomic,assign) CGFloat badgeViewCornerRadius UI_APPEARANCE_SELECTOR;
-
-/**
- * The height for the hold rect of text.
- */
-@property (nonatomic,assign) CGFloat badgeViewHeight UI_APPEARANCE_SELECTOR;
-/**
- * shadow radius, if it > 0, we will draw a shadow.
- */
-@property (nonatomic,assign) CGFloat badgeViewShadowRadius UI_APPEARANCE_SELECTOR;
-/**
- * will you prefer a backgroud image? it will auto scale to fit the badge size with the same radio.
- */
-@property (nonatomic,strong) UIImage* badgeBackgroundImage UI_APPEARANCE_SELECTOR;
-/**
- * tiny mode,not show text,just a small cire.
- */
-@property (nonatomic,assign) BOOL tinyMode UI_APPEARANCE_SELECTOR;
-/**
- * tiny mode's backgroud color.
- */
-@property (nonatomic,strong) UIColor* tinyModeBackgroundColor UI_APPEARANCE_SELECTOR;
-
-/**
- * tiny mode's radius.
- */
-@property (nonatomic,assign) CGFloat badgeViewTinyRadius UI_APPEARANCE_SELECTOR;
-
-/**
  * Optionally init using this method to have the badge automatically added to another view.
  */
 - (id)initWithParentView:(UIView *)parentView alignment:(JSBadgeViewAlignment)alignment;
