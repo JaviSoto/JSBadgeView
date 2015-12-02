@@ -178,7 +178,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     const CGFloat superviewHeight = superviewBounds.size.height;
     
     if (self.tinyMode) {
-        viewWidth = 2*(self.badgeViewTinyRadius+self.badgeViewShadowRadius);
+        viewWidth = 2*self.badgeViewTinyRadius;
         viewHeight = viewWidth;
     }
     
