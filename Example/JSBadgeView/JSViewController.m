@@ -75,8 +75,6 @@
         rectangle.layer.shadowPath = rectangleShadowPath;
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:rectangle alignment:JSBadgeViewAlignmentTopRight];
-        //if u want to customize the bage size, set the badgeMinWidth property to a nonzero value, if u want to use the default size, just not set any value to the badgeMinWidth property.
-//        badgeView.badgeMinWidth = 5;     // customize the bage size, u should also set proper font size.
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
         
         [scrollView addSubview:rectangle];
