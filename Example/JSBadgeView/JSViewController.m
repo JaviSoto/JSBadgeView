@@ -64,17 +64,19 @@
     {
         UIView *rectangle = [[UIView alloc] initWithFrame:CGRectIntegral(CGRectMake(xOffset,
                                                                                     yOffset,
-                                                                                    rectangleBounds.size.width,
-                                                                                    rectangleBounds.size.height))];
+                                                                                    rectangleBounds.size.width/3,
+                                                                                    rectangleBounds.size.height/3))];
         rectangle.backgroundColor = kSquareColor;
-        rectangle.layer.cornerRadius = kSquareCornerRadius;
-        rectangle.layer.shadowColor = [UIColor blackColor].CGColor;
-        rectangle.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
-        rectangle.layer.shadowOpacity = 0.4;
-        rectangle.layer.shadowRadius = 1.0;
-        rectangle.layer.shadowPath = rectangleShadowPath;
+//        rectangle.layer.cornerRadius = kSquareCornerRadius;
+//        rectangle.layer.shadowColor = [UIColor blackColor].CGColor;
+//        rectangle.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
+//        rectangle.layer.shadowOpacity = 0.4;
+//        rectangle.layer.shadowRadius = 1.0;
+//        rectangle.layer.shadowPath = rectangleShadowPath;
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:rectangle alignment:JSBadgeViewAlignmentTopRight];
+        badgeView.badgeMinWidth = 5;
+        badgeView.badgeTextFont = [UIFont systemFontOfSize:8];
         badgeView.badgeText = [NSString stringWithFormat:@"%d", i];
         
         [scrollView addSubview:rectangle];
