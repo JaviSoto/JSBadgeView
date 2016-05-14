@@ -47,7 +47,7 @@ badgeView.badgeText = @"3";
 
 ```objc
 [[JSBadgeView appearance] setBadgeBackgroundColor:UIColor.blackColor];
-[[JSBadgeView appearance] setBadgeAlignment:@(JSBadgeViewAlignmentTopRight)];
+[[JSBadgeView appearance] setBadgeAlignment:JSBadgeViewAlignmentTopRight];
 ```
 
 ## Compatibility
