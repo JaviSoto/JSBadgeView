@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0085CBC79ADA41BC767551D5 /* libPods-JSBadgeView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F42C529430008EF283EB8 /* libPods-JSBadgeView.a */; };
-		5312783C20E92540139D5FA1 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF74FB7A498EE2AEDF6409A /* libPods-Tests.a */; };
+		1AA47013154335F06E4CF441 /* libPods-JSBadgeView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1573C628A5E56A601A6DD64 /* libPods-JSBadgeView.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -23,6 +22,7 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
+		8864EFED58354BD436A163EE /* libPods-JSBadgeView-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 785A709CA4D437093B942D42 /* libPods-JSBadgeView-Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4710A6D9F6E587F815EE61CF /* Pods-JSBadgeView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSBadgeView.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSBadgeView/Pods-JSBadgeView.release.xcconfig"; sourceTree = "<group>"; };
+		3D447A3279199E71E68AD04C /* Pods-JSBadgeView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSBadgeView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSBadgeView/Pods-JSBadgeView.debug.xcconfig"; sourceTree = "<group>"; };
 		508B304F8643136D00EB38E1 /* JSBadgeView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JSBadgeView.podspec; path = ../JSBadgeView.podspec; sourceTree = "<group>"; };
-		5DD5BED21E33178EE622AEF4 /* Pods-JSBadgeView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSBadgeView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSBadgeView/Pods-JSBadgeView.debug.xcconfig"; sourceTree = "<group>"; };
+		5E4D53E43682931584AEC8E5 /* Pods-JSBadgeView-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSBadgeView-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSBadgeView-Tests/Pods-JSBadgeView-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* JSBadgeView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSBadgeView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,12 +59,12 @@
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		614F42C529430008EF283EB8 /* libPods-JSBadgeView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSBadgeView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		667CB378985469D56646ABA0 /* Pods-JSBadgeView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSBadgeView.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSBadgeView/Pods-JSBadgeView.release.xcconfig"; sourceTree = "<group>"; };
+		785A709CA4D437093B942D42 /* libPods-JSBadgeView-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSBadgeView-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E66A5CD90C8429FF1CE6AF6 /* Pods-JSBadgeView-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSBadgeView-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSBadgeView-Tests/Pods-JSBadgeView-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BDFB26075414CBD3D401034A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		CEF74FB7A498EE2AEDF6409A /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D10106DB93F01B97A3009044 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		C1573C628A5E56A601A6DD64 /* libPods-JSBadgeView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSBadgeView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D819A07376F6D2A835D9C61D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		E45AA29F2E306801B8504E11 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				0085CBC79ADA41BC767551D5 /* libPods-JSBadgeView.a in Frameworks */,
+				1AA47013154335F06E4CF441 /* libPods-JSBadgeView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,13 +86,24 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				5312783C20E92540139D5FA1 /* libPods-Tests.a in Frameworks */,
+				8864EFED58354BD436A163EE /* libPods-JSBadgeView-Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19832FF91E288638FFB18DF9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3D447A3279199E71E68AD04C /* Pods-JSBadgeView.debug.xcconfig */,
+				667CB378985469D56646ABA0 /* Pods-JSBadgeView.release.xcconfig */,
+				5E4D53E43682931584AEC8E5 /* Pods-JSBadgeView-Tests.debug.xcconfig */,
+				7E66A5CD90C8429FF1CE6AF6 /* Pods-JSBadgeView-Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +112,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				A8BD1E7E9863D8176568336D /* Pods */,
+				19832FF91E288638FFB18DF9 /* Pods */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -123,8 +134,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				614F42C529430008EF283EB8 /* libPods-JSBadgeView.a */,
-				CEF74FB7A498EE2AEDF6409A /* libPods-Tests.a */,
+				C1573C628A5E56A601A6DD64 /* libPods-JSBadgeView.a */,
+				785A709CA4D437093B942D42 /* libPods-JSBadgeView-Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -183,17 +194,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		A8BD1E7E9863D8176568336D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5DD5BED21E33178EE622AEF4 /* Pods-JSBadgeView.debug.xcconfig */,
-				4710A6D9F6E587F815EE61CF /* Pods-JSBadgeView.release.xcconfig */,
-				E45AA29F2E306801B8504E11 /* Pods-Tests.debug.xcconfig */,
-				D10106DB93F01B97A3009044 /* Pods-Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -201,11 +201,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "JSBadgeView" */;
 			buildPhases = (
-				7C90B127821C2227416080E0 /* Check Pods Manifest.lock */,
+				EB826668182CC9D5A2DCAB95 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				2B276D4DEFA48597D1EAFEA4 /* Copy Pods Resources */,
+				4DA69725C7F6D899A534242D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,11 +220,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				106D020FAD18EA0C5E3BC55A /* Check Pods Manifest.lock */,
+				2DED5C14A59A7256FD8CD80D /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				5AE0D8D1A81A1FC823A57EFA /* Copy Pods Resources */,
+				EB4278D8282D400ABC89F071 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -293,64 +293,76 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		106D020FAD18EA0C5E3BC55A /* Check Pods Manifest.lock */ = {
+		2DED5C14A59A7256FD8CD80D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JSBadgeView-Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2B276D4DEFA48597D1EAFEA4 /* Copy Pods Resources */ = {
+		4DA69725C7F6D899A534242D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JSBadgeView/Pods-JSBadgeView-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/JSBadgeView/JSBadgeView.bundle",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSBadgeView.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JSBadgeView/Pods-JSBadgeView-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5AE0D8D1A81A1FC823A57EFA /* Copy Pods Resources */ = {
+		EB4278D8282D400ABC89F071 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JSBadgeView-Tests/Pods-JSBadgeView-Tests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/JSBadgeView/JSBadgeView.bundle",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSBadgeView.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JSBadgeView-Tests/Pods-JSBadgeView-Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7C90B127821C2227416080E0 /* Check Pods Manifest.lock */ = {
+		EB826668182CC9D5A2DCAB95 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JSBadgeView-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -493,7 +505,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DD5BED21E33178EE622AEF4 /* Pods-JSBadgeView.debug.xcconfig */;
+			baseConfigurationReference = 3D447A3279199E71E68AD04C /* Pods-JSBadgeView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -508,7 +520,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4710A6D9F6E587F815EE61CF /* Pods-JSBadgeView.release.xcconfig */;
+			baseConfigurationReference = 667CB378985469D56646ABA0 /* Pods-JSBadgeView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -523,7 +535,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E45AA29F2E306801B8504E11 /* Pods-Tests.debug.xcconfig */;
+			baseConfigurationReference = 5E4D53E43682931584AEC8E5 /* Pods-JSBadgeView-Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JSBadgeView.app/JSBadgeView";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -546,7 +558,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D10106DB93F01B97A3009044 /* Pods-Tests.release.xcconfig */;
+			baseConfigurationReference = 7E66A5CD90C8429FF1CE6AF6 /* Pods-JSBadgeView-Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JSBadgeView.app/JSBadgeView";
 				FRAMEWORK_SEARCH_PATHS = (

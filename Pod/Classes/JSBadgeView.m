@@ -46,27 +46,6 @@ static const CGFloat JSBadgeViewHeight = 16.0f;
 static const CGFloat JSBadgeViewTextSideMargin = 8.0f;
 static const CGFloat JSBadgeViewCornerRadius = 10.0f;
 
-// Thanks to Peter Steinberger: https://gist.github.com/steipete/6526860
-static BOOL JSBadgeViewIsUIKitFlatMode(void)
-{
-    static BOOL isUIKitFlatMode = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-#ifndef kCFCoreFoundationVersionNumber_iOS_7_0
-#define kCFCoreFoundationVersionNumber_iOS_7_0 847.2
-#endif
-#ifndef UIKitVersionNumber_iOS_7_0
-#define UIKitVersionNumber_iOS_7_0 0xB57
-#endif
-        // We get the modern UIKit if system is running >= iOS 7 and we were linked with >= SDK 7.
-        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0) {
-            isUIKitFlatMode = (NSVersionOfLinkTimeLibrary("UIKit") >> 16) >= UIKitVersionNumber_iOS_7_0;
-        }
-    });
-
-    return isUIKitFlatMode;
-}
-
 @implementation JSBadgeView
 
 + (void)applyCommonStyle
@@ -78,24 +57,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     badgeViewAppearanceProxy.badgeBackgroundColor = UIColor.redColor;
     badgeViewAppearanceProxy.badgeTextFont = [UIFont boldSystemFontOfSize:UIFont.systemFontSize];
     badgeViewAppearanceProxy.badgeTextColor = UIColor.whiteColor;
-}
-
-+ (void)applyLegacyStyle
-{
-    JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
-
-    badgeViewAppearanceProxy.badgeOverlayColor = [UIColor colorWithWhite:1.0f alpha:0.3];
-    badgeViewAppearanceProxy.badgeTextShadowColor = UIColor.clearColor;
-    badgeViewAppearanceProxy.badgeShadowColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
-    badgeViewAppearanceProxy.badgeShadowSize = CGSizeMake(0.0f, 3.0f);
-    badgeViewAppearanceProxy.badgeStrokeWidth = 2.0f;
-    badgeViewAppearanceProxy.badgeStrokeColor = UIColor.whiteColor;
-}
-
-+ (void)applyIOS7Style
-{
-    JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
-
+    
     badgeViewAppearanceProxy.badgeOverlayColor = UIColor.clearColor;
     badgeViewAppearanceProxy.badgeTextShadowColor = UIColor.clearColor;
     badgeViewAppearanceProxy.badgeShadowColor = UIColor.clearColor;
@@ -108,15 +70,6 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     if (self == JSBadgeView.class)
     {
         [self applyCommonStyle];
-
-        if (JSBadgeViewIsUIKitFlatMode())
-        {
-            [self applyIOS7Style];
-        }
-        else
-        {
-            [self applyLegacyStyle];
-        }
     }
 }
 
