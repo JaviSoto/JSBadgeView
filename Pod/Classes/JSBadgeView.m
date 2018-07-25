@@ -48,7 +48,7 @@ static const CGFloat JSBadgeViewCornerRadius = 10.0f;
 
 @implementation JSBadgeView
 
-+ (void)applyCommonStyle
++ (void)applyStyle
 {
     JSBadgeView *badgeViewAppearanceProxy = JSBadgeView.appearance;
 
@@ -69,7 +69,7 @@ static const CGFloat JSBadgeViewCornerRadius = 10.0f;
 {
     if (self == JSBadgeView.class)
     {
-        [self applyCommonStyle];
+        [self applyStyle];
     }
 }
 
