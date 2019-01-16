@@ -63,6 +63,15 @@ static const CGFloat JSBadgeViewCornerRadius = 10.0f;
     badgeViewAppearanceProxy.badgeShadowColor = UIColor.clearColor;
     badgeViewAppearanceProxy.badgeStrokeWidth = 0.0f;
     badgeViewAppearanceProxy.badgeStrokeColor = badgeViewAppearanceProxy.badgeBackgroundColor;
+    
+    badgeViewAppearanceProxy.badgeViewShadowRadius = 1.0f;
+    badgeViewAppearanceProxy.badgeViewHeight = 16.0f;
+    badgeViewAppearanceProxy.badgeViewTextSideMargin = 8.0f;
+    badgeViewAppearanceProxy.badgeViewCornerRadius = 10.0f;
+    badgeViewAppearanceProxy.tinyMode = NO;
+    badgeViewAppearanceProxy.tinyModeBackgroundColor = UIColor.redColor;
+    badgeViewAppearanceProxy.badgeViewTinyRadius = 5.0f;
+
 }
 
 + (void)initialize
