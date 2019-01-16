@@ -1,6 +1,6 @@
 PODS:
   - Expecta (1.0.6)
-  - JSBadgeView (1.4.1)
+  - JSBadgeView (2.0.0)
   - Specta (1.0.7)
 
 DEPENDENCIES:
@@ -9,7 +9,7 @@ DEPENDENCIES:
   - Specta
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Expecta
     - Specta
 
@@ -19,9 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  JSBadgeView: 67b15e14438b19adc40ddc016d36b07016a68044
+  JSBadgeView: 3dbfbaf6c580f5f8dc8d1283d826c94f2041b7c5
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
 PODFILE CHECKSUM: c814e0cbf7cb16d7dab3042bf5dc39c9d36b0d13
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
