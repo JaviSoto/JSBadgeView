@@ -8,9 +8,7 @@
 Customizable UIKit badge view like the one on applications in the iOS springboard.
 Very optimized for performance: drawn entirely using CoreGraphics.
 
-<img src="http://f.cl.ly/items/1L3k0z0a3X3i353M1G0h/JSBadgeView.png" />
-
-iOS 7 style:
+Snapshoot:
 
 <img src="http://cl.ly/image/3G3J2k3n133W/JSBadgeView-iOS7.png" />
 
@@ -47,12 +45,12 @@ badgeView.badgeText = @"3";
 
 ```objc
 [[JSBadgeView appearance] setBadgeBackgroundColor:UIColor.blackColor];
-[[JSBadgeView appearance] setBadgeAlignment:@(JSBadgeViewAlignmentTopRight)];
+[[JSBadgeView appearance] setBadgeAlignment:JSBadgeViewAlignmentTopRight];
 ```
 
 ## Compatibility
 - Supports ARC. If you want to use it in a project without ARC, mark ```JSBadgeView.m``` with the linker flag ```-fobjc-arc```.
-- Compatible with iOS4.3+.
+- Compatible with iOS7.0+.
 
 ## MIT License
 Copyright 2013 [Javier Soto](http://twitter.com/javisoto) (ios@javisoto.es)
